@@ -35,6 +35,17 @@ public class ManageController {
         return "Manage/Login";
     }
 
+    @RequestMapping(value = "/Index")
+    public ModelAndView Index(@RequestParam String username) {
+
+        User user= userService.getByName(username);//根据用户名获取该用户对象
+
+        Map<String, Object> mapModel = new HashedMap();
+        mapModel.put("UserName",username);
+
+        return new ModelAndView("Manage/Index",mapModel);
+    }
+
 
     @RequestMapping(value = "/ManageLogin")
     @ResponseBody
