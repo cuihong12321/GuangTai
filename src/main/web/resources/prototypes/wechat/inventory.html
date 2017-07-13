@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>库存</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../styles/mobile.css">
+</head>
+<body class="bgf0f0f0">
+<div id="cluth" class="interesting-content1 overflow-hidden">
+    <ul>
+        <li class="border-bottom padding2 bgfff">
+            <div class="product">
+                <img class="fl" src="../../images/interesting-1.png">
+                <div class="fl product-title">
+                    <div>
+                        <h2 class="fl">徐州车之友汽车服务有限公司</h2>
+                        <div class="clear"></div>
+                    </div>
+                    <h3>徐州新城区昆仑大道美的广场D座（南门东20米）</h3>
+                    <h3><span class="color-fd523e fl">0510-254875447885</span></h3>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="mt8"></div>
+<div class="maintain-order-information">
+    <div class="maintain-order-information-img border-bottom padding2">
+        <img src="../../images/index-pc-content-introduce-6.jpg">
+        <span> 金润吉油气两用润滑油 </span>
+        <div class="qianzheng1-main-visa-people1 fr">
+            <div class="flow-record-content-item-li-money display-inline-block vm">30</div>
+            <span class="display-inline-block vm">桶</span>
+        </div>
+    </div>
+    <div class="maintain-order-information-img border-bottom padding2">
+        <img src="../../images/index-pc-content-introduce-6.jpg">
+        <span> 金润吉油气两用润滑油 </span>
+        <div class="qianzheng1-main-visa-people1 fr">
+            <div class="flow-record-content-item-li-money1 display-inline-block vm color-fd523e">8</div>
+            <span class="display-inline-block vm">桶</span>
+        </div>
+    </div>
+    <div class="maintain-order-information-img border-bottom padding2">
+        <img src="../../images/index-pc-content-introduce-6.jpg">
+        <span> 金润吉油气两用润滑油 </span>
+        <div class="qianzheng1-main-visa-people1 fr">
+            <div class="flow-record-content-item-li-money display-inline-block vm">30</div>
+            <span class="display-inline-block vm">桶</span>
+        </div>
+    </div>
+    <div class="maintain-order-information-img border-bottom padding2">
+        <img src="../../images/index-pc-content-introduce-6.jpg">
+        <span> 金润吉油气两用润滑油 </span>
+        <div class="qianzheng1-main-visa-people1 fr">
+            <div class="flow-record-content-item-li-money1 display-inline-block vm color-fd523e">8</div>
+            <span class="display-inline-block vm">桶</span>
+        </div>
+    </div>
+    <div class="maintain-order-information-img border-bottom padding2">
+        <img src="../../images/index-pc-content-introduce-6.jpg">
+        <span> 金润吉油气两用润滑油 </span>
+        <div class="qianzheng1-main-visa-people1 fr">
+            <div class=" flow-record-content-item-li-money display-inline-block vm">30</div>
+            <span class="display-inline-block vm">桶</span>
+        </div>
+    </div>
+    <div class="maintain-order-information-img border-bottom padding2">
+        <img src="../../images/index-pc-content-introduce-6.jpg">
+        <span> 金润吉油气两用润滑油 </span>
+        <div class="qianzheng1-main-visa-people1 fr">
+            <div class="flow-record-content-item-li-money1 display-inline-block vm color-fd523e">8</div>
+            <span class="display-inline-block vm">桶</span>
+        </div>
+    </div>
+</div>
+<div class="open1"></div><!--背景层-->
+<div class="open-item" id="areaBox">
+    <p class="open-item-title center">修改库存<i class="fr" onclick="close_bottom(this);">×</i> </p>
+    <!--数量-->
+    <div class="open-item-foot">
+        <form>
+            <p class="open-item-foot-p"><span>修改库存</span><input type="text" class="open-item-foot-p-text"><input type="submit" class="open-item-foot-p-submit fr" value="确定"></p>
+        </form>
+
+    </div>
+</div>
+</body>
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    var a;
+    $(function () {
+        $(".maintain-order-information-img").on("click",function () {
+
+            a=$(this).find(".flow-record-content-item-li-money").text();
+            open_bottom();
+        });
+    });
+    //勾选优惠券，弹出窗口
+    function open_bottom() {
+        $(".open1").show();
+        $(".open-item").animate({bottom:'0px'},200);
+        $("body").bind("touchmove",function(event){event.preventDefault();});//code
+
+    }
+    //关闭底部弹框
+    function close_bottom() {
+        $(".open1").hide();
+        $(".open-item").animate({bottom:'-245'},200);
+        $("body").unbind("touchmove");
+    }
+</script>
+</html>

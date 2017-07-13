@@ -1,0 +1,45 @@
+﻿@charset "UTF-8";
+/**CSS Reset**/
+body, div, span, h1, h2, h3, h4, h5, h6, header, footer, section, article, aside, details, figcaption, figure, hgroup, nav, menu, address, time, canvas, audio, video, p, pre, sup, sub, ul, ol, li, dl, dt, dd, form, input, button, textarea, select, iframe, img, a { padding: 0; margin: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+header, footer, section, article, aside, details, figcaption, figure, hgroup, nav, menu { display: block; }
+html, body {-webkit-overflow-scrolling: touch; }
+body { background-color: #eee; color: #333; font-family: "Helvetica Neue", "Microsoft Yahei", Tahoma, Arial, Roboto, "Droid Sans", "Droid Sans Fallback", "Heiti SC", sans-self; }
+h1, h2, h3, h4, h5, h6 { font-weight: normal; }
+ul, ol { list-style-type: none; }
+a { color: #333; text-decoration: none; outline: none; }
+a:link, a:visited, a:hover, a:active { color: #333; outline: none; }
+.browser {overflow: hidden;margin: 0 23px 0 12px;}
+/*选择地区*/
+.express-area {  background-color: #fff; }
+.express-area a { display: block;padding: 8px 0px;}
+.express-area a i{    position: absolute;
+    right: 11px;
+    top: 33%;}
+.express-area dl { position: relative; line-height: 1.2rem; color: #4d525d; }
+.express-area dl dt { position: absolute; top: 0; left: 0; font-size: .7rem; line-height: 1.2rem; }
+.express-area dl dd { text-align: justify;color:#333;}
+/*选择地区弹层*/
+.express-area-box {     position: absolute;
+    bottom: -100%;
+    left: 27.5%;
+    z-index: 15;
+    width: 100%;
+    margin-left: -160px;
+    background-color: #fff;
+    color: #4d525d; }
+.express-area-box header { position: relative; border-top: 1px solid #e2e2e2; border-bottom: 1px solid #e2e2e2; }
+.express-area-box header h3 { margin: 0 1.675rem; text-align: center; font-size: 15px; line-height: 2.25rem; padding:6px 0}
+.express-area-box header .back,
+.express-area-box header .close {position: absolute;top: 24%;right: 12px;height: 2.25rem; }
+.express-area-box header .back {    display: none;left: 0;background: url(../images/back.png) no-repeat 3% 35%;background-size: .45rem .75rem; }
+/*.express-area-box header .close { right: 12px;color:#333;}*/
+.express-area-box article { height: 400px; overflow-y: scroll; }
+.area-list li {     padding: 10px;border-bottom: 1px solid #e2e2e2;text-align: justify;font-size: 15px;}
+/*@media (max-width: 720px) {*/
+	.express-area-box { position: fixed; left: 0; width: 100%; margin-left: 0; }
+/*}*/
+/*遮罩层*/
+.mask { display: none; position: absolute; top: 0; left: 0; z-index: 12; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); }
+/*@media (max-width: 720px) {*/
+	.mask { position: fixed; }
+/*}*/

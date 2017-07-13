@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加银行卡</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../styles/mobile.css">
+</head>
+<body class="bgf0f0f0">
+<div class="withdraw add-card mb100">
+    <form>
+        <div class="withdraw-content-item form-group">
+            <label>持卡人姓名</label>
+            <input class="withdraw-content-item-input1 form-control display-inline-block" type="text">
+        </div>
+        <div class="withdraw-content-item form-group">
+            <label>银行类型</label>
+            <div class="dropdown add-card-button" style="display: inline-block">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    建设银行（1234）
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu add-card-button-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#" class="center">中国银行（4545）</a></li>
+                    <li><a href="#" class="center">莱商银行（4545）</a></li>
+                    <li><a href="#" class="center">工商银行（4545）</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="withdraw-content-item form-group">
+            <label>卡号</label>
+            <input class="withdraw-content-item-input1 form-control display-inline-block" type="text">
+        </div>
+        <div class="withdraw-content-item form-group">
+            <label>持卡类型</label>
+            <div class="dropdown add-card-button" style="display: inline-block">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    储蓄卡
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu add-card-button-menu" aria-labelledby="dropdownMenu2">
+                    <li><a href="#" class="center">储蓄卡</a></li>
+                    <li><a href="#" class="center">信用卡</a></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <!--<div class="fr withdraw-content-item-all-money" ><span>我的财余额<i>¥100.00</i></span><a href="#" class="display-inline-block plr4 FE523E">全部提现</a> </div>-->
+</div>
+<button type="submit" class="button-fixed">确认添加</button>
+<script src="../../librarys/jquery/jquery-2.2.3.min.js"></script>
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

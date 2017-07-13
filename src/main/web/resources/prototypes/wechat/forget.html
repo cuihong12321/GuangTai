@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>忘记密码</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../styles/mobile.css">
+    <script src="../../librarys/jquery/jquery-2.2.3.min.js"></script>
+</head>
+<body class="bgf0f0f0">
+<div class="plr4 mb100">
+    <input class="forgrt-text" type="text" placeholder="输入手机号/邮箱">
+    <input class="forgrt-text" type="text" style="width: 60%" placeholder="输入验证码">
+    <!--<div >获取短信验证码</div>-->
+    <input class="fr note" type="button" id="btn" value="免费获取验证码" onclick="startCount(this)" />
+    <input class="forgrt-text" type="text" placeholder="请设置6-20位登录密码">
+    <input class="forgrt-text" type="text" placeholder="确认密码">
+</div>
+<button type="submit" class="button-fixed">确认</button>
+<script type="text/javascript">
+    var time=60;
+    function startCount(val) {
+        $("#btn").addClass("e5e5e5");
+        val.setAttribute("disabled",true);
+        val.value="重新发送(" + time + "s)";
+        time = time - 1;
+        if (time <= -1) {
+            val.value="免费获取验证码";
+            stopCount();
+            time=60;
+            $("#btn").removeClass("e5e5e5");
+            return;
+        }
+        task = setTimeout(function() {
+            startCount(val)
+        },1000)
+    }
+    function stopCount() {
+        clearTimeout(task);
+        $("#btn").attr("disabled",false);
+    }
+</script>
+</body>
+</html>

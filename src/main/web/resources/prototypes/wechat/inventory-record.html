@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>库存记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/mobile.css">
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+<body class="bgf0f0f0">
+<a href="#" class=" bgfff center padding2 border-bottom">选择服务商</a>
+<div class="mt8"></div>
+<div class="bgfff flow-record-content-time">
+    <div class="fl">
+        <h1>2017年2月</h1>
+        <span>支出¥1400&nbsp;&nbsp;&nbsp;收入¥1600</span>
+    </div>
+    <div class="fr flow-record-content-calendar">
+        <div class='input-group date' id='datetimepicker10'>
+            <input type='text' class="form-control" style="display: none" id="time_val">
+            <span class="input-group-addon bgfff">
+                    <i class="fa fa-calendar fa-2x"></i>
+                </span>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="mt8"></div>
+<div class="bgfff">
+    <ul>
+        <li>
+            <div class="border-bottom pr">
+                <ul class="recommend-ul noborder padding2">
+                    <li>
+                        <img class="fl" src="../../images/index-pc-content-introduce-3.jpg">
+                        <ul class="fl">
+                            <li class="mtb05">
+                                <h3 class="fl">金润吉油气两用润滑油 4L </h3>
+                                <div class="clear"></div>
+                            </li>
+                            <li class="mtb05">
+                                <h3 class="fl">徐州车之友汽车服务有限公司</h3>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <h3 class="fl">2017-03-10</h3>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+                <span class="padding2 flow-record-content-item-li-money lineheight2 fr inventory-record-number">+30</span>
+            </div>
+        </li>
+        <li>
+            <div class="border-bottom pr">
+                <ul class="recommend-ul noborder padding2">
+                    <li>
+                        <img class="fl" src="../../images/index-pc-content-introduce-3.jpg">
+                        <ul class="fl">
+                            <li class="mtb05">
+                                <h3 class="fl">金润吉油气两用润滑油</h3>
+                                <div class="clear"></div>
+                            </li>
+                            <li class="mtb05">
+                                <h3 class="fl">品牌机滤</h3>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <h3 class="fl">全免工时费</h3>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+                <span class="padding2 flow-record-content-item-li-money lineheight2 fr inventory-record-number">+30</span>
+            </div>
+        </li>
+        <li>
+            <div class="border-bottom pr">
+                <ul class="recommend-ul noborder padding2">
+                    <li>
+                        <img class="fl" src="../../images/index-pc-content-introduce-3.jpg">
+                        <ul class="fl">
+                            <li class="mtb05">
+                                <h3 class="fl">金润吉油气两用润滑油</h3>
+                                <div class="clear"></div>
+                            </li>
+                            <li class="mtb05">
+                                <h3 class="fl">品牌机滤</h3>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <h3 class="fl">全免工时费</h3>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+                <span class="padding2 flow-record-content-item-li-money lineheight2 fr inventory-record-number">+30</span>
+            </div>
+        </li>
+        <li>
+            <div class="border-bottom pr">
+                <ul class="recommend-ul noborder padding2">
+                    <li>
+                        <img class="fl" src="../../images/index-pc-content-introduce-3.jpg">
+                        <ul class="fl">
+                            <li class="mtb05">
+                                <h3 class="fl">金润吉油气两用润滑油</h3>
+                                <div class="clear"></div>
+                            </li>
+                            <li class="mtb05">
+                                <h3 class="fl">品牌机滤</h3>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <h3 class="fl">全免工时费</h3>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+                <span class="padding2 flow-record-content-item-li-money lineheight2 fr inventory-record-number">+30</span>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="../../bower_components/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+    $(function () {
+        var datepicker = $('#datetimepicker10').datetimepicker({
+            viewMode: 'years',
+            format: 'MM/YYYY'
+        });
+        datepicker.on("dp.hide", function (e) {
+            alert($("#time_val").val());
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../styles/checkbox3.css">
+    <link rel="stylesheet" href="../../librarys/loading/mop-lqs.css">
+    <script src="../../librarys/loading/mop-lqs.js"></script>
+    <link rel="stylesheet" href="../../styles/mobile.css">
+    <script src="../../librarys/jquery/jquery-2.2.3.min.js"></script>
+    <style>
+        .mop-load-6 {
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body class="bgf0f0f0">
+<div class="plr4 mb100">
+    <div class="information">
+        <ul>
+            <li>
+                <img src="../../images/user.png">
+                <input type="text" placeholder="用户名/手机号/邮箱">
+                <span class="fr colorfoo lh40">*</span>
+                <!--<img style="width: 6%" src="../../images/delet.png">-->
+            </li>
+            <li>
+                <img src="../../images/password.png">
+                <input type="text" placeholder="密码">
+                <span class="colorfoo fr lh40">*</span>
+            </li>
+            <li>
+                <img src="../../images/password.png">
+                <input type="text" placeholder="确认密码">
+                <span class="colorfoo fr lh40">*</span>
+            </li>
+        </ul>
+    </div>
+    <div class="information">
+        <ul>
+            <li>
+                <img src="../../images/telephone.png">
+                <input type="text" placeholder="手机号码">
+                <span class="colorfoo fr lh40">*</span>
+            </li>
+            <li style="position: relative">
+                <img src="../../images/telephone.png">
+                <input type="text" placeholder="输入验证码">
+                <!--<span class="colorfoo fr lh40">*</span>-->
+                <!--<div >获取短信验证码</div>-->
+                <input class="fr verification" type="button" id="btn" value="免费获取验证码" onclick="startCount(this)"/>
+            </li>
+            <li>
+                <img src="../../images/email.png">
+                <input type="text" placeholder="邮箱">
+            </li>
+        </ul>
+    </div>
+    <div class="information">
+        <ul>
+            <li>
+                <a href="referrer.html">
+                    <img src="../../images/referrer.png">
+                    <span class="ml3">选择推荐人</span>
+                    <i class="fa fa-angle-right fa-15x fr"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="information">
+        <ul>
+            <li>
+                <a href="#">
+                    <img src="../../images/car.png">
+                    <span class="ml3">爱车信息</span>
+                    <i class="fa fa-angle-right fa-15x fr"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="protocol">
+        <div class="checkbox3 checkbox-success checkbox-inline checkbox-check checkbox-round  checkbox-light">
+            <input type="checkbox" id="checkbox-fa-light-2" checked="">
+            <label for="checkbox-fa-light-2">
+                我已阅读并同意<a href="#" class="display-inline-block" data-toggle="modal" data-target="#myModal"> ***协议</a>！
+            </label>
+        </div>
+    </div>
+    <button id="btnOK" type="button" class="button-fixed">确认</button>
+</div>
+<div class="hide mop-load-6">
+    <div class="mop-load-6"></div>
+</div>
+<!--用户协议模态框 fade-->
+<div class="modal bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title">“挣点油钱”用户注册协议</h4>
+            </div>
+            <div class="modal-body max-height">
+                <h1 class="modal-title">第一条 本注册协议相关名词解释</h1>
+                <p class="modal-p">1-1 用户</p>
+                <p class="modal-p">用户是指认可“挣点油钱”用户注册协议相关内容，向平台提出注册申请并获平台批准的具有完全民事行为能力和
+                    完全民事权利能力的自然人。</p>
+                <p class="modal-p">1-2 平台</p>
+                <p class="modal-p">平台是指“挣点油钱”微信公众号、“挣点油钱”网站、“挣点油钱”APP等互联网服务终端。</p>
+                <p class="modal-p">用户同意此在线注册条款之效力如同用户亲自签字、盖章的书面条款一样，对用户具有法律约束力。
+                    用户进一步同意，进入“挣点油钱”会员注册程序即意味着用户同意了本注册条款的所有内容，且只有用户完全同意所有
+                    服务条款并完成注册程序，才能成为本“挣点油钱”平台的正式用户。本注册条款自用户注册成功之日起在用户与本平台之间产生法律效力。</p>
+
+                <h1 class="modal-title">第二条 用户身份保证及会员账号管理</h1>
+                <p class="modal-p">2-1 用户承诺并保证自己是具有完全民事行为能力和完全民事权利能力的自然人。用户必须保证所填写的用户信息及车
+                    辆信息是真实、准确、完整、及时的，且没有任何引人误解或者虚假的陈述，并保证平台可通过用户所填写的联系方式与用户取得联系。</p>
+                <p class="modal-p">2-2 用户应根据“挣点油钱”相关服务的要求及时提供真实有效的车主信息、实际公里数、车辆照片等资料，否则本平
+                    台有权拒绝向该会员或用户提供相关服务。</p>
+                <p class="modal-p">2-3 用户承诺将及时更新其用户信息、车辆信息等以维持信息的有效性。</p>
+                <p class="modal-p">2-4 如果用户提供的资料或车辆信息包含有不正确、不真实的信息，“挣点油钱”平台保留取消用户会员资格并随时结束
+                    为该用户提供服务的权利并追究其违约责任。</p>
+                <p class="modal-p">2-5 用户注册时应提供一个用户名和密码，用户凭用户名和密码登录平台。</p>
+                <p class="modal-p">2-6 用户将对用户名和密码安全负全部责任，并且用户对以其用户名进行的所有活动和事件负全责。
+                    用户有权根据平台规定的程序修改密码。</p>
+                <p class="modal-p">2-7 非经平台书面同意，用户名和密码不得擅自转让或者授权他人使用，否则用户应承担由此造成的一切后果。</p>
+                <p class="modal-p">2-8 用户若发现任何非法使用用户帐号或存在安全漏洞的情况，应立即通告本平台。</p>
+
+                <h1 class="modal-title">第三条 用户的行为规范</h1>
+                <p class="modal-p">3-1 用户在使用“挣点油钱”平台提供的服务时，应遵守本协议及”挣点油钱“的相关使用规则，遵守自愿、
+                    平等、公平及诚实信用原则，不利用“挣点油钱”平台侵犯他人合法权益及谋取不正当利益，不扰乱网
+                    上交易的正常秩序。</p>
+                <p class="modal-p">3-2 用户可以在”挣点油钱“平台发布对商品或服务的体验、评价等信息，并可对其进行适当的修改、删除，
+                    但不得在挣点油钱平台发布包含以下内容的言论：</p>
+                <p class="modal-p">3-2-1 反对宪法所确定的基本原则，煽动、抗拒、破坏宪法和法律、行政法规实施的；</p>
+                <p class="modal-p">3-2-2 煽动颠覆国家政权，推翻社会主义制度，煽动、分裂国家，破坏国家统一的；</p>
+                <p class="modal-p">3-2-3 损害国家荣誉和利益的；</p>
+                <p class="modal-p">3-2-4 煽动民族仇恨、民族歧视，破坏民族团结的；</p>
+                <p class="modal-p">3-2-5 任何包含对种族、性别、宗教、地域内容等歧视的；</p>
+                <p class="modal-p">3-2-6 捏造或者歪曲事实，散布谣言，扰乱社会秩序的；</p>
+                <p class="modal-p">3-2-7 宣扬封建迷信、邪教、淫秽、色情、赌博、暴力、凶杀、恐怖、教唆犯罪的；</p>
+                <p class="modal-p">3-2-8 公然侮辱他人或者捏造事实诽谤他人的，或者进行其他恶意攻击的；</p>
+                <p class="modal-p">3-2-9 损害国家机关信誉的；</p>
+                <p class="modal-p">3-2-10 其他违反宪法和法律行政法规的。</p>
+                <p class="modal-p">用户在“挣点油钱”平台发布的信息，均代表用户的观点，与“挣点油钱”无关，用户须对其发布的内容独立承担完全的法律责任。</p>
+                <p class="modal-p">3-3 用户在使用“挣点油钱”平台提供的服务时，不得有下列行为：</p>
+                <p class="modal-p">3-3-1 利用“挣点油钱”平台从事洗钱、窃取商业秘密、窃取个人信息等违法犯罪活动；</p>
+                <p class="modal-p">3-3-2 将有关干扰、破坏或限制任何计算机软件、硬件或通讯设备功能的软件病毒或其他计算机代码、档案和程
+                    序之资料，加以上载、发布、发送电子邮件或以其他方式传送；</p>
+                <p class="modal-p">3-3-3 干扰“挣点油钱”平台正常运行等损害“挣点油钱”运行系统的行为；</p>
+                <p class="modal-p">3-3-4 企图规避“挣点油钱”平台的安全设置或网络系统，包括获取用户不应获取的数据，登录未经明确授权的服务
+                    器或帐户，或采用运行端口扫描等方式窥探其他网络的安全措施；</p>
+                <p class="modal-p">3-3-5 以导致“挣点油钱”的计算机系统或设施承受不合理负载的方式获取“挣点油钱”提供的服务或网站信息，或进
+                    行可能导致此类情况出现的行为；</p>
+                <p class="modal-p">3-3-6 实施任何形式的网络监控，从而截取与自身无关的信息；</p>
+                <p class="modal-p">3-3-7 其他损害他人或“挣点油钱”平台合法权益的行为。</p>
+                <p class="modal-p">3-4 一经发现用户提供虚假信息或有上述禁止的言论或行为的，“挣点油钱”平台有权采取暂停提供服务、删除违
+                    法违规信息、限制用户购买、禁止用户发言、锁定用户帐户等处理措施。若因用户的上述言论或行为给他人或“挣点
+                    油钱”平台造成损失的，用户应承担赔偿责任。</p>
+                <p class="modal-p">3-5 若国家相关机关向挣点油钱发出命令、指示、裁决等法律文书或第三人向“挣点油钱”平台投诉并提供相关证
+                    据材料，要求冻结、关闭用户帐号及交易的，“挣点油钱”平台有权对相关帐号及交易进行冻结或取消，同时对违反
+                    本协议及“挣点油钱”平台相关服务规则的用户，“挣点油钱”平台有权封停其帐号。“挣点油钱”平台采取上述措施
+                    的，将通过用户注册时提交的联系信息通知用户。</p>
+                <p class="modal-p">3-6 用户应遵守本协议及“挣点油钱”平台公示的各项服务规则的内容，若因用户违反本协议及服务规则造成损失
+                    的，用户应予以赔偿。</p>
+
+                <h1 class="modal-title">第四条 用户的权利和义务</h1>
+                <p class="modal-p">4-1 用户有权利拥有自己在“挣点油钱”平台上的用户名和密码并有权利使用自己的用户名和密码随时登录会员专区。</p>
+                <p class="modal-p">4-2 用户有权利享受平台提供的相关服务。</p>
+                <p class="modal-p">4-3 用户保证不会利用技术或其他手段破坏及扰乱平台服务终端的正常运营。</p>
+                <p class="modal-p">4-4 对由于用户向平台提供的联络方式有误或安全性、稳定性不佳等导致的一切后果，用户应自行承担责任，包括但不
+                    限于因用户未能及时收到平台相关通知而导致的后果和损失。</p>
+                <p class="modal-p">4-5 用户保证其使用平台相关服务时将遵从国家、地方法律法规、行业惯例和社会公共道德，因用户非法行为给平台造
+                    成损失的，用户应依法予以赔偿。</p>
+                <p class="modal-p">4-6 用户在每次保养前，应按照平台的规定，先提交车辆相关真实有效的信息及清晰里程表、行驶证照片，再享受保养
+                    服务。如被平台检测出，有类似或疑似骗取保养的行为，应积极配合调查，否则用户应5倍赔偿套餐平台公示标准
+                    价格；同时平台可终止用户所有会员权限及保养权利，并保留起诉用户及追偿所有损失的权利。</p>
+                <p class="modal-p">4-7 如会员账户存在车辆异常保养记录，会员应该提供平台要求的相关用车证明进行审核，如过路费、高速费、过桥费等有效票据和证明资料。</p>
+
+                <h1 class="modal-title">第五条 平台的权利和义务</h1>
+                <p class="modal-p">5-1 平台应根据用户选择的服务以及交纳款项的情况向用户提供约定的相关服务。</p>
+                <p class="modal-p">5-2 平台承诺对用户资料采取对外保密措施，不向第三方披露用户资料，不授权第三方使用用户资料，除非：</p>
+                <p class="modal-p">5-2-1 依据法律法规的规定应当提供；</p>
+                <p class="modal-p">5-2-2 行政、司法等有权部门要求平台提供；</p>
+                <p class="modal-p">5-2-3 用户同意平台向第三方提供；</p>
+                <p class="modal-p">5-2-4 用户在平台上完成充值后需向另一方提供这些信息。</p>
+                <p class="modal-p">5-2-5 用户在发布信息时透露这些信息。</p>
+                <p class="modal-p">5-3 平台有权使用用户及其绑定车辆信息。</p>
+                <p class="modal-p">5-4 平台保留在用户违反国家、地方法律法规规定或违反本平台在线注册条款
+                    的情况下终止为用户提供服务并终止用户帐号的权利，并且在任何情况下，平台对任何间接、偶然、特殊及继起的损害不负责任。</p>
+                <!---->
+                <h1 class="modal-title">第六条 服务条款的修订</h1>
+                <p class="modal-p">6-1 平台有权在必要时修改服务条款，平台服务条款一旦发生变动，将会在重要页面提示修改内容或平台推送消息、公
+                    告、站内信等形式告知用户。如果不同意所改动的内容，用户可以主动取消会员身份和服务。如果用户继续享用平
+                    台提供的相关服务，则视为接受服务条款的变动。</p>
+                <p class="modal-p">6-2 因原材料价格波动或成本价格变动等市场因素，导致平台服务及价格体系调整或变动，平台将保留随时修改其服务
+                    体系和价格的权利，并将会在重要页面提示修改内容或平台推送消息、公告、站内信等形式告知用户。</p>
+
+                <h1 class="modal-title">第七条 服务的终止</h1>
+                <p class="modal-p">7-1 用户有权随时申请终止其会员资格或其在本平台申请的一项或多项服务，已产生相关服务，所交纳款项均不予退
+                    还。</p>
+                <p class="modal-p">7-2 平台有权根据实际情况决定取消为用户提供的一项或多项服务，但应退还套餐购买时实际支付价格的剩余部分
+                    （须扣除已使用的以平台标准零售价计算的所有油品、工时费、机滤配件等及相关服务费用），除此之外平台不承担任何责任。</p>
+
+                <h1 class="modal-title">第八条 争议解决及法律适用</h1>
+                <p class="modal-p">8-1 平台拥有本注册协议的最终解释权。因本服务条款有关的一切争议，双方当事人应通过友好协商方式解决。如果协
+                    商未成，双方均可向徐州市泉山区人民法院诉讼解决。</p>
+                <p class="modal-p">8-2 本注册条款的效力、解释、履行和争议的解决均适用中华人民共和国法律法规和计算机、互联网行业的规范。</p>
+
+                <h1 class="modal-title">第九条 不可抗力</h1>
+                <p class="modal-p">9-1 因不可抗力或者其他意外事件，使得本条款履行不可能、不必要或者无意义的，遭受不可抗力、意外事件的一方不
+                    承担责任。</p>
+                <p class="modal-p">9-2 不可抗力、意外事件是指不能预见、不能克服并不能避免且对一方或双方当事人造成重大影响的客观事件，包括但
+                    不限于自然灾害如洪水、地震、瘟疫流行和风暴等以及社会事件如战争、动乱、政府行为等。</p>
+                <p class="modal-p">9-3 用户同意鉴于互联网的特殊性，黑客攻击、互联网连通中断或者系统故障等属于不可抗力，由此给用户或者第三方
+                    造成的损失不应由平台承担。</p>
+
+                <h1 class="modal-title">第十条 附则</h1>
+                <p class="modal-p">10-1 一方变更通知、通讯地址或其他联系方式、信息，应自变更之日起及时将变更后的地址、联系方式、信息通知另一
+                    方，否则变更方应对此造成的一切后果承担责任。</p>
+                <p class="modal-p">10-2 服务条款的修改和服务及价格体系的修订，平台只需在相关客户端和平台网页上发布即视为送达。用户在此再次保证已经
+                    完全阅读并理解了上述会员注册条款并自愿正式进入“挣点油钱”平台会员在线注册程序，接受上述所有条款的约束。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="agree" class="btn btn-primary">已阅读</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        //打开页面是弹出模态框
+//        $('#myModa0').modal({backdrop:'static',keyboard: false});
+
+        //设置用户协议模态框高度
+        var doc_height = $(window).height();
+        var other_height = $(".modal-content").offset().top;//模态框距离页面顶部的距离
+        var modal_header_height = $('.modal-header').height() - 20;
+        var modal_foot_height = $('.modal-footer').height() - 20;
+        $(".max-height").height(doc_height + other_height + modal_header_height + modal_foot_height + modal_foot_height + modal_foot_height - 20);
+
+        $("#agree").click(function () {
+            $('#myModal').modal('hide')
+        });
+
+        $("#btnOK").on("click", function () {
+//            alert($('#checkbox-fa-light-2').attr('checked'));
+            if(document.getElementById("checkbox-fa-light-2").checked == false){
+                alert(1);
+            }else {
+                alert(2);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    var time = 60;
+    function startCount(val) {
+        $(".mop-load-6").removeClass("hide");
+        $("#btn").addClass("aaa");
+        val.setAttribute("disabled", true);
+        val.value = "重新发送(" + time + "s)";
+        time = time - 1;
+        if (time <= -1) {
+            val.value = "免费获取验证码";
+            stopCount();
+            time = 60;
+            $("#btn").removeClass("aaa");
+            return;
+        }
+        task = setTimeout(function () {
+            startCount(val)
+        }, 1000)
+    }
+    function stopCount() {
+        $(".mop-load-6").addClass("hide");
+        clearTimeout(task);
+        $("#btn").attr("disabled", false);
+    }
+</script>
+</body>
+</html>

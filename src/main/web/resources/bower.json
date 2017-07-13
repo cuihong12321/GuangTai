@@ -1,0 +1,30 @@
+{
+  "name": "resources",
+  "authors": [
+    "cuichen <cuichen@ruibu.info>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1",
+    "swiper": "2",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.7.0",
+    "video.js": "^5.15.1",
+    "iscroll": "^5.2.0",
+    "datatables.net": "^2.1.1",
+    "datatables.net-bs": "^2.1.1",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "jquery-minicolors": "^2.2.4",
+    "bootstrap-datepicker": "^1.7.0"
+  }
+}

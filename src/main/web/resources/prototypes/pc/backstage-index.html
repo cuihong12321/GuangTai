@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta menuname="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta menuname="description" content="Xenon Boostrap Admin Panel" />
+    <meta menuname="author" content="" />
+    <title>Xenon - Alerts</title>
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../styles/xenon-core.css">
+    <link rel="stylesheet" href="../../styles/xenon-forms.css">
+    <link rel="stylesheet" href="../../styles/xenon-components.css">
+    <link rel="stylesheet" href="../../styles/xenon-skins.css">
+    <link rel="stylesheet" href="../../styles/custom.css">
+    <link rel="stylesheet" href="../../styles/pc-index.css">
+    <script src="../../librarys/nav/jquery-1.8.3.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+<body class="page-body">
+
+
+
+<div class="page-container">
+    <div class="sidebar-menu toggle-others fixed">
+
+        <div class="sidebar-menu-inner">
+
+            <header class="logo-env">
+
+                <!-- logo -->
+                <div class="logo">
+                    <a href="#" class="logo-expanded">
+                        <img src="../../images/index-pc-header-logo.png">
+                    </a>
+
+                    <a href="#" class="logo-collapsed">
+                        <img src="../../images/index-pc-header-logo.png" width="40" alt="" />
+                    </a>
+                </div>
+
+                <!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+                <div class="mobile-menu-toggle visible-xs">
+                    <a href="#" data-toggle="user-info-menu">
+                        <i class="fa-bell-o"></i>
+                        <span class="badge badge-success">7</span>
+                    </a>
+
+                    <a href="#" data-toggle="mobile-menu">
+                        <i class="fa-bars"></i>
+                    </a>
+                </div>
+            </header>
+            <ul id="main-menu" class="main-menu">
+                <!-- add class "multiple-expanded" to allow multiple submenus to open -->
+                <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+                <li>
+                    <a href="#" onclick="addActive(this);">
+                        <i class="linecons-cog"></i>
+                        <span class="title">首页</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="addActive(this);">
+                        <i class="linecons-desktop"></i>
+                        <span class="title">用户</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span class="title">家庭医生签约（网上签约）</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">家庭病床服务</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">预约上门</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">个人健康档案</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">诊疗用药</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">满意度调查</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="linecons-note"></i>
+                        <span class="title">部门</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span class="title">签约居家养老协议（网上可办理）</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">预约上门服务</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">代办业务</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">上门送餐借助（美团）可支付</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="linecons-mail"></i>
+                        <span class="title">厂房</span>
+                        <span class="label label-success pull-right">5</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span class="title">网上视频诊疗</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">网上购药（图片、价格）网上支付功能</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="linecons-database"></i>
+                        <span class="title">客户</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span class="title">市内专家（有照片、专业介绍）</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">预约服务（支付功能）</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="linecons-database"></i>
+                        <span class="title">产品管理</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span class="title">市内专家（有照片、专业介绍）</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">预约服务（支付功能）</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="linecons-database"></i>
+                        <span class="title">生产计划</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span class="title">市内专家（有照片、专业介绍）</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">预约服务（支付功能）</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="main-content">
+
+        <!-- User Info, Notifications and Menu Bar -->
+        <nav class="navbar user-info-navbar" role="navigation">
+
+            <!-- Left links for user info navbar -->
+            <ul class="user-info-menu left-links list-inline list-unstyled">
+
+                <li class="hidden-sm hidden-xs">
+                    <a href="#" data-toggle="sidebar">
+                        <i class="fa-bars"></i>
+                    </a>
+                </li>
+            </ul>
+            <!-- Right links for user info navbar -->
+            <ul class="user-info-menu right-links list-inline list-unstyled">
+                <!--搜索功能取消2016.9.1-->
+                <!--<li class="search-form">&lt;!&ndash; You can add "always-visible" to show make the search input visible &ndash;&gt;-->
+
+                <!--<form methgetByUpdatetime"get" action="extra-search.html">-->
+                <!--<input type="text" menuname="s" class="form-control search-field" placeholder="Type to search..." />-->
+
+                <!--<button type="submit" class="btn btn-link">-->
+                <!--<i class="linecons-search"></i>-->
+                <!--</button>-->
+                <!--</form>-->
+
+                <!--</li>-->
+
+                <li class="dropdown user-profile">
+                    <a href="#">
+                        <img src="../../images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
+                        <span>
+								Arlind Nushi
+							</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="fa-power-off"></i>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <!--主题内容-->
+        <div class="page-title mb50">
+
+            <div class="title-env">
+                <h1 class="title">Responsive Table</h1>
+                <p class="description">An example of responsive table with fixed header</p>
+            </div>
+
+            <div class="breadcrumb-env">
+
+                <ol class="breadcrumb bc-1">
+                    <li>
+                        <a href="dashboard-1.html"><i class="fa-home"></i>Home</a>
+                    </li>
+                    <li>
+
+                        <a href="tables-basic.html">Tables</a>
+                    </li>
+                    <li class="active">
+
+                        <strong>Responsive Table</strong>
+                    </li>
+                </ol>
+
+            </div>
+
+        </div>
+
+
+
+
+        <footer class="main-footer sticky footer-type-1">
+
+            <div class="footer-inner">
+
+                <!-- Add your copyright text here -->
+                <div class="footer-text">
+                    &copy; 2014
+                    <strong>Xenon</strong>
+                    More Templates <a href="#" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+                </div>
+
+
+                <!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->
+                <div class="go-up">
+
+                    <a href="#" rel="go-top">
+                        <i class="fa-angle-up"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </footer>
+    </div>
+    <!--右边微信聊天部分取消2016.09.01-->
+</div>
+
+
+
+
+
+
+<!-- Bottom Scripts -->
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../js/TweenMax.min.js"></script>
+<script src="../../js/resizeable.js"></script>
+<script src="../../js/joinable.js"></script>
+<script src="../../js/xenon-api.js"></script>
+<script src="../../js/xenon-toggles.js"></script>
+
+<!-- Imported scripts on this page -->
+<!--<script src="../../js/rwd-table.min.js"></script>-->
+<!-- JavaScripts initializations and stuff -->
+<script src="../../js/xenon-custom.js"></script>
+<script>
+    $(function(){
+        var nav_width = $('.sidebar-menu').width();
+        var doc_width = $(document).width();
+        $('.user-info-navbar').width(doc_width-nav_width);
+        $('footer.main-footer').width(doc_width-nav_width);
+
+    })
+    //    function addActive(src){
+    //        $(src).addClass("bgcolor");
+    //
+    //    }
+</script>
+</body>
+</html>

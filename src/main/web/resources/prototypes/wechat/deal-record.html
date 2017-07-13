@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>流水记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="../../styles/mobile.css">
+</head>
+<body class="bgf0f0f0">
+<div class="flow-record-title overflow-hidden">
+    <p><i class="fl" onclick="open_bottom();">筛选</i> <a href="index.html" class="fa fa-home fr" style="font-size: 2em"></a> </p>
+</div>
+<div class="flow-record-content">
+    <div class="flow-record-content-time">
+        <div class="fl">
+            <h1>2017年2月</h1>
+            <span>支出¥1400&nbsp;&nbsp;&nbsp;收入¥1600</span>
+        </div>
+        <div class="fr flow-record-content-calendar">
+            <div class='input-group date' id='datetimepicker10'>
+                <input type='text' class="form-control" style="display: none" id="time_val">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar fa-2x"></i>
+                </span>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="flow-record-content-item">
+        <ul>
+            <li>
+                <div class="flow-record-content-item-li">
+                    <img src="../../images/wealth-4.png">
+                    <div class="display-inline-block flow-record-content-time">
+                        <h1>红包</h1>
+                        <span>2017-02-13</span>
+                    </div>
+                    <div class="fr padding2 flow-record-content-item-li-money lineheight2">+30</div>
+                </div>
+            </li>
+            <li>
+                <div class="flow-record-content-item-li">
+                    <img src="../../images/wealth-1.png">
+                    <div class="display-inline-block flow-record-content-time">
+                        <h1>保养</h1>
+                        <span>2017-02-13</span>
+                    </div>
+                    <div class="fr padding2 flow-record-content-item-li-money1  lineheight2">-1230</div>
+                </div>
+            </li>
+            <li>
+                <div class="flow-record-content-item-li">
+                    <img src="../../images/wealth-4.png">
+                    <div class="display-inline-block flow-record-content-time">
+                        <h1>红包</h1>
+                        <span>2017-02-13</span>
+                    </div>
+                    <div class="fr padding2 flow-record-content-item-li-money  lineheight2">+30</div>
+                </div>
+            </li>
+            <li>
+                <div class="flow-record-content-item-li">
+                    <img src="../../images/wealth-1.png">
+                    <div class="display-inline-block flow-record-content-time">
+                        <h1>保养</h1>
+                        <span>2017-02-13</span>
+                    </div>
+                    <div class="fr padding2 flow-record-content-item-li-money1  lineheight2">-1230</div>
+                </div>
+            </li>
+            <li>
+                <div class="flow-record-content-item-li">
+                    <img src="../../images/wealth-4.png">
+                    <div class="display-inline-block flow-record-content-time">
+                        <h1>红包</h1>
+                        <span>2017-02-13</span>
+                    </div>
+                    <div class="fr padding2 flow-record-content-item-li-money  lineheight2">+30</div>
+                </div>
+            </li>
+            <li>
+                <div class="flow-record-content-item-li">
+                    <img src="../../images/wealth-1.png">
+                    <div class="display-inline-block flow-record-content-time">
+                        <h1>保养</h1>
+                        <span>2017-02-13</span>
+                    </div>
+                    <div class="fr padding2 flow-record-content-item-li-money1  lineheight2">-1230</div>
+                </div>
+            </li>
+            <li>
+                <div class="flow-record-content-item-li">
+                    <img src="../../images/wealth-4.png">
+                    <div class="display-inline-block flow-record-content-time">
+                        <h1>红包</h1>
+                        <span>2017-02-13</span>
+                    </div>
+                    <div class="fr padding2 flow-record-content-item-li-money lineheight2">+30</div>
+                </div>
+            </li>
+            <li>
+                <div class="flow-record-content-item-li">
+                    <img src="../../images/wealth-1.png">
+                    <div class="display-inline-block flow-record-content-time">
+                        <h1>保养</h1>
+                        <span>2017-02-13</span>
+                    </div>
+                    <div class="fr padding2 flow-record-content-item-li-money1 lineheight2">-1230</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="open1"></div><!--背景层-->
+<div class="open-item" id="areaBox">
+    <div class="open-item-title center border-bottom">
+        <p>选择交易类型</p>
+        <span style="position: absolute;right: 2%;top: -25px;font-size: 30px;">×</span>
+    </div>
+    <!--选择的优惠券-->
+    <div class="open-item-content padding2 overflow-hidden">
+        <ul class="flow-record-content-ul">
+            <li>全部</li>
+            <li>保养</li>
+            <li>返利</li>
+            <li>工时费</li>
+            <li>红包</li>
+            <li>补助</li>
+        </ul>
+    </div>
+    <!--取消-->
+    <div class="flow-record-content-close center" onclick="close_bottom();">取消</div>
+</div>
+<script src="../../librarys/jquery/jquery-2.2.3.min.js"></script>
+<script src="../../bower_components/moment/min/moment.min.js"></script>
+<script src="../../bower_components/moment/min/locales.min.js"></script>
+<script src="../../bower_components/moment/min/moment-with-locales.min.js"></script>
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+    $(function () {
+        $(".flow-record-content-ul li").on("click",function () {
+            type_choose(this);
+            close_bottom();
+        });
+        var datepicker = $('#datetimepicker10').datetimepicker({
+            viewMode: 'months',
+            format: 'MM/YYYY',
+            locale: 'zh-CN'
+    });
+        datepicker.on("dp.hide", function (e) {
+            alert($("#time_val").val());
+        });
+    });
+    function type_choose(res) {
+        var text = $(res).text();
+        $(".flow-record-title i").text(text);
+    }
+    //勾选优惠券，弹出窗口
+    function open_bottom() {
+        $(".open1").show();
+        $(".open-item").animate({bottom:'0px'},200);
+        $("body").bind("touchmove",function(event){event.preventDefault();});//code
+    }
+    //关闭底部弹框
+    function close_bottom() {
+        $(".open1").hide();
+        $(".open-item").animate({bottom:'-245'},200);
+        $("body").unbind("touchmove");
+    }
+</script>
+</body>
+</html>

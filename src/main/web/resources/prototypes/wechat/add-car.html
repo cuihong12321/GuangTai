@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加爱车</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../styles/checkbox3.css">
+    <link rel="stylesheet" href="../../styles/mobile.css">
+</head>
+<body class="bgf0f0f0">
+<div class="padding2 mb100">
+<div class="add-car-type padding2 bffffff mt8">
+    <ul>
+        <li>
+            <a href="#">
+                <h1 class="fl">车型</h1>
+                <div class="fl ml3 width80">
+                    <img class="fl" src="../../images/cartype.png">&nbsp;
+                    <h1 class="fl width80">&nbsp;&nbsp; 一汽-大众&nbsp;&nbsp;迈腾</h1>
+                    <div class="clear"></div>
+                </div>
+                <i class="fa fa-angle-right fa-15x fr"></i>
+                <div class="clear"></div>
+            </a>
+        </li>
+        <li>
+            <h1 class="fl">车牌</h1>
+            <!--<span class="fl ml3 platenumber" id="modeltype">苏</span>-->
+            <span class="fl ml3 platenumber e73534"><span id="modeltype">苏</span><span class="caret"></span></span>
+            <!--<input class="fl ml3 width5" type="text">-->
+            <!--<i class="fl fa fa-circle ml3 licence-dot"></i>-->
+            <input class="fl ml3 width65 outline_none" type="text" placeholder="请输入完整的车牌号">
+            <div class="clear"></div>
+        </li>
+        <li class="bordernone">
+            <h1 class="fl">发动机型号</h1>
+            <input class="fl ml3 width65 outline_none" type="text" placeholder="请输入发动机型号">
+            <div class="clear"></div>
+        </li>
+    </ul>
+</div>
+<div class="padding2 bffffff mt8">
+    <div class="driving-license-top">
+        <a href="#">
+            <h1 class="fl fs12lh25">行驶证</h1>
+            <a href="#"><img class="fr" src="../../images/camera.png"><div class="clear"></div> </a>
+            <div class="clear"></div>
+        </a>
+    </div>
+    <div class="driving-license">
+        <img src="../../images/car-photo.jpg">
+        <img src="../../images/car-photo.jpg">
+        <img src="../../images/car-photo.jpg">
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="padding2 bffffff mt8">
+    <div class="driving-license-top">
+        <a href="#">
+            <h1 class="fl fs12lh25">车辆整体</h1>
+            <a href="#"><img class="fr" src="../../images/camera.png"><div class="clear"></div> </a>
+            <div class="clear"></div>
+        </a>
+    </div>
+    <div class="driving-license">
+        <img src="../../images/car-photo.jpg">
+        <img src="../../images/car-photo.jpg">
+        <img src="../../images/car-photo.jpg">
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="protocol bffffff padding2">
+    <div class="checkbox3 checkbox-success checkbox-inline checkbox-check checkbox-round  checkbox-light">
+        <input type="checkbox" id="checkbox-fa-light-2" checked="">
+        <label for="checkbox-fa-light-2" style="padding-left: 25px;">设置为默认爱车</label>
+    </div>
+</div>
+<button type="submit" class="button-fixed">确认</button>
+</div>
+
+<div class="open1"></div><!--背景层-->
+<div class="open-item width100" id="areaBox">
+    <p class="open-item-title center border-bottom">选择车牌省份</p>
+    <!--选择的优惠券-->
+    <div class="open-item-content padding2 overflow-hidden">
+        <ul class="add-car-content-ul">
+            <li>京</li>
+            <li>沪</li>
+            <li>闽</li>
+            <li>浙</li>
+            <li>鲁</li>
+            <li>津</li>
+            <li class="mr0">渝</li>
+            <li>云</li>
+            <li>辽</li>
+            <li>黑</li>
+            <li>湘</li>
+            <li>皖</li>
+            <li>豫</li>
+            <li class="mr0">新</li>
+            <li>苏</li>
+            <li>赣</li>
+            <li>鄂</li>
+            <li>桂</li>
+            <li>冀</li>
+            <li>甘</li>
+            <li class="mr0">晋</li>
+            <li>蒙</li>
+            <li>陕</li>
+            <li>吉</li>
+            <li>贵</li>
+            <li>粤</li>
+            <li>青</li>
+            <li class="mr0">藏</li>
+            <li>川</li>
+            <li>宁</li>
+            <li>琼</li>
+            <li>警</li>
+            <li>暂</li>
+            <li>使</li>
+        </ul>
+    </div>
+    <!--取消-->
+    <div class="flow-record-content-close center" onclick="close_bottom();">取消</div>
+</div>
+<script src="../../librarys/jquery/jquery-2.2.3.min.js"></script>
+<script>
+    var bottom_height = $("#areaBox").height();
+    $("#areaBox").css("bottom",-bottom_height);
+
+    $(function () {
+
+        $("#modeltype").on("click",function () {
+            open_bottom();
+        })
+        $(".add-car-content-ul li").on("click",function () {
+            type_choose(this);
+            close_bottom();
+        });
+    });
+    function type_choose(res) {
+        var text = $(res).text();
+        $("#modeltype").text(text);
+    }
+
+    //勾选优惠券，弹出窗口
+    function open_bottom() {
+        $(".open1").show();
+        $("#areaBox").animate({bottom:'0px'},200);
+        $("body").bind("touchmove",function(event){event.preventDefault();});//code
+    }
+    //关闭底部弹框
+    function close_bottom() {
+        $(".open1").hide();
+        $(".open-item").animate({bottom:(-bottom_height+"px")},200);
+        $("body").unbind("touchmove");
+    }
+</script>
+</body>
+</html>

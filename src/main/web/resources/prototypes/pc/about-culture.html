@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>企业文化_江苏金润润滑油科技股份有限公司</title>
+    <link rel="shortcut icon" href="../../images/tab-title.png">
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/pc-index.css">
+</head>
+<body>
+    <!--页头-->
+    <div class="hander">
+        <div class="hander-top">
+            <div class="head-content">
+                <span class="fl"><i class="fa fa-phone"></i> 400-0431-118 (8:30 - 17:00）</span>
+                <span class="fr"><a href="" onclick="AddFavorite('金士百润滑油',location.href)"><i class="fa fa-heart heart-color"></i> 收藏本站</a> </span>
+            </div>
+        </div>
+        <div class="hander-navigation overflow-hidden">
+            <div class="width1200">
+                <img src="../../images/index-pc-header-logo.png">
+                <!--导航栏-->
+                <ul class="hander-nav mt10">
+                    <li class="nav-menu"><a href="index.html">首页</a></li>
+                    <li class="nav-menu active"><a href="about.html">关于金润</a>
+                        <!--<ul class="nav-dropdown-menu">-->
+                        <!--<li><a href="#">关于金润</a></li>-->
+                        <!--<li><a href="#">关于金润</a></li>-->
+                        <!--<li><a href="#">关于金润</a></li>-->
+                        <!--</ul>-->
+                    </li>
+                    <li class="nav-menu">
+                        <a href="product.html">产品中心</a>
+                        <!--<ul class="nav-dropdown-menu">-->
+                        <!--<li><a href="#">产品中心</a></li>-->
+                        <!--<li><a href="#">产品中心</a></li>-->
+                        <!--<li><a href="#">产品中心</a></li>-->
+                        <!--</ul>-->
+                    </li>
+                    <li class="nav-menu">
+                        <a href="news.html">新闻动态</a>
+                        <!--<ul class="nav-dropdown-menu">-->
+                        <!--<li><a href="#">新闻动态</a></li>-->
+                        <!--<li><a href="#">新闻动态</a></li>-->
+                        <!--<li><a href="#">新闻动态</a></li>-->
+                        <!--</ul>-->
+                    </li>
+                    <li class="nav-menu">
+                        <a href="certificate.html">荣誉认证</a>
+                        <!--<ul class="nav-dropdown-menu">-->
+                        <!--<li><a href="#">荣誉认证</a></li>-->
+                        <!--<li><a href="#">荣誉认证</a></li>-->
+                        <!--<li><a href="#">荣誉认证</a></li>-->
+                        <!--</ul>-->
+                    </li>
+                    <li class="nav-menu">
+                        <a href="partner.html">合作单位</a>
+                        <!--<ul class="nav-dropdown-menu">-->
+                        <!--<li><a href="#">合作经销商</a></li>-->
+                        <!--<li><a href="#">合作经销商</a></li>-->
+                        <!--<li><a href="#">合作经销商</a></li>-->
+                        <!--</ul>-->
+                    </li>
+                    <li class="nav-menu"><a href="tour.html">线上参观</a></li>
+                    <li class="nav-menu"><a href="contact.html">联系我们</a></li>
+                    <!--<li class="nav-menu"><a href="#">挣点油钱</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="img-box">
+            <a href="#"><img src="../../images/pc-content-banner-1.jpg"></a>
+        </div>
+    </div>
+    <div class="content width1200">
+        <h1>当前位置：<a href="index.html">首页</a>&nbsp;&gt;&nbsp;<a href="about.html">关于金润</a>&nbsp;&gt;&nbsp;<a href="about-culture.html">企业文化</a></h1>
+        <div class="content-content f5f5f5 mb50">
+            <h1 class="pt50 pl80">企业文化</h1>
+            <h2 class="pb10 pl80">Enterprise Culture</h2>
+            <h3 class="mt80 pb100 pl50 pr100">
+                <p><b class="contact-name">企业理念：</b>服务于社会、贡献于国家。</p>
+                <p><b class="contact-name">企业目标：</b>高起点大跨步，建成现代企业；做精品，创一流，实现产业报国。</p>
+                <p><b class="contact-name">发展战略：</b>依靠机制创新引进高素质人才，依靠高素质人才开发高科技产品，依靠高科技产品抢占市场制高点。</p>
+                <p><b class="contact-name">企业精神：</b>开拓进取、务实高效。</p>
+                <p><b class="contact-name">环保理念：</b>企业不消灭污染，污染将消灭企业。</p>
+                <p><b class="contact-name">人才观：</b>重用能人而不虚用完人，追求卓越而不追求完美。</p>
+                <p><b class="contact-name">竞争观：</b>战胜自己才能战胜对手，真正的对手是自己。</p>
+                <p><b class="contact-name">道德观：</b>厚德载物，诚信为本。</p>
+            </h3>
+        </div>
+    </div>
+    <div class="footer2">
+        <div class="width1200">
+            <h1> 苏公网安备 32031102000493号  |  苏ICP备16030401号 </h1>
+        </div>
+    </div>
+    <script>
+        //收藏本站
+        function AddFavorite(title, url) {
+            try {
+                window.external.AddFavorite(url, title);
+            }
+            catch (e) {
+                try {
+                    window.sidebar.addPanel(title, url, "");
+                }
+                catch (e) {
+                    alert("抱歉，您所使用的浏览器无法完成此操作。\n\n加入收藏失败，请使用Ctrl+D进行添加");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

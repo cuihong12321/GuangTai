@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-touch-fullscreen" content="YES">
+    <meta name="format-detection" content="telephone=no">
+    <META HTTP-EQUIV="imagetoolbar" CONTENT="no" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="pragram" content="no-cache">
+    <title>惠开车</title>
+    <link rel="stylesheet" type="text/css" href="../../styles/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../styles/style1.css" />
+    <style>
+        .city-choose .letter {
+            position: fixed;
+            right: 5px;
+            top: 0;
+            margin: 0;
+            top: 45px;
+            overflow: visible;
+            z-index:100;
+        }
+    </style>
+</head>
+<body>
+<section style="padding:0 15px 0 3px;">
+    <article>
+        <div  class="city-choose">
+            <div class="city-con">
+                    <div class="hd" id="tg${orderletter.key}">${orderletter.key}</div>
+                    <div class="bd">
+                        <ul class="city-choose-item">
+                                <li>
+                                    <a href="#" style="overflow: hidden;display: block">
+                                        <em class="fl"><img src="../../images/car-1.png" alt=""></em>
+                                        <span class="fl">${brand.name}</span>
+                                    </a>
+                                </li>
+                        </ul>
+                    </div>
+            </div>
+            <div class="letter">
+                <span><a id="A">A</a></span>
+                <span><a id="B">B</a></span>
+                <span><a id="C">C</a></span>
+                <span><a id="D">D</a></span>
+                <span><a id="E">E</a></span>
+                <span><a id="F">F</a></span>
+                <span><a id="G">G</a></span>
+                <span><a id="H">H</a></span>
+                <span><a id="I">I</a></span>
+                <span><a id="J">J</a></span>
+                <span><a id="K">K</a></span>
+                <span><a id="L">L</a></span>
+                <span><a id="M">M</a></span>
+                <span><a id="N">N</a></span>
+                <span><a id="O">O</a></span>
+                <span><a id="P">P</a></span>
+                <span><a id="Q">Q</a></span>
+                <span><a id="R">R</a></span>
+                <span><a id="S">S</a></span>
+                <span><a id="T">T</a></span>
+                <span><a id="U">U</a></span>
+                <span><a id="V">V</a></span>
+                <span><a id="W">W</a></span>
+                <span><a id="X">X</a></span>
+                <span><a id="Y">Y</a></span>
+                <span><a id="Z">Z</a></span>
+            </div>
+        </div>
+    </article>
+</section>
+<div  style="display:none">
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257133697'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257133697' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+</body>
+<script type="text/javascript" src="../../librarys/nav/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.params.js"></script>
+<script type="text/javascript" src="../../js/pinyin.js"></script>
+<script type="text/javascript" src="../../js/hbcommon.js"></script>
+<script>
+    $(function(){
+        var vehicleOwnerId=getGetPar("hkcVehicleOwnerInfoId");
+        var vehicleId =getGetPar("hkcVehicleInfoId");
+        var from = getGetPar("from");
+
+        $('section').height($(window).height());
+        $('section').css('overflow','auto');
+        addHeader("选择品牌");
+        _h = ($(window).height()-45) / 26;
+        $('.letter span').height(15);
+        var letterTop =  $(window).height()/2 - (15*25)/2;
+        $('.letter').css('top',letterTop + 'px');
+        $(".letter a").click(function()
+        {
+            var id = $(this).attr("id");
+            var tgid = 'tg' + id;
+            var tgtop = $("#" + tgid).position().top + $(".city-con").scrollTop();
+            $("section").animate({scrollTop:tgtop}, 500);
+        });
+
+
+
+        /*加载动态数据
+         */
+        var datas = $.query.get("datas");
+        var params = "";
+        var urls= "/HKCIBY/hkcBrandSeries/queryAllBrandsHkcBrandSeries.action";
+        $.ajax({
+            type: "post",
+            url: urls,
+            cache : false,
+            dataType : "json",
+            data : params,
+            beforeSend: function (){
+                loading();
+            },
+            success:function (data){
+                closeLoading();
+                var items ="" ;
+                $.each(data.headChar,function(i,j){
+                    var tgId ="tg"+j ;
+                    var head = "<div class=\"hd\" id='"+tgId+"'>"+j+"</div>";
+                    var item ="" ;
+
+                    var lisBefore ="<div class=\"bd\"><ul class=\"city-choose-item\">";
+                    var lisAfter = "</ul></div>" ;
+                    var lis ="";
+                    $.each(data.result,function(e,m){
+                        if(j==m.headChar){
+                            var brandImageurl = "";
+                            var li = "<li><a href=\"#\"><em><img src=\"carindexs/"+codefans_net_CC2PY(m.nodeName).toLowerCase()+".jpg\" alt=\"\" ></em>"+
+                                "<span nodeid='"+m.brandSeriesId+"' >"+m.nodeName+"</span></a></li>" ;
+                            lis = lis + li ;
+                        }
+                    });
+
+                    if(lis.length>1){
+                        item = lisBefore +lis+lisAfter ;
+                    }
+                    items = items + head + item ;
+                });
+
+                $(".city-con").html("");
+                $(".city-con").append(items);
+
+                //增加点击事件处理
+                $(".city-choose-item li").unbind("click");
+                $(".city-choose-item li").click(function(){
+                    var nodeid =$(this).find("span").attr("nodeid") ;
+                    var nodename = $(this).find("span").text() ;
+                    window.location.href = "car_style.html?parentId="+nodeid +"&parentName="+ nodename+"&datas="+ datas + "&from=" + from + "&hkcVehicleOwnerInfoId="+vehicleOwnerId+"&hkcVehicleInfoId="+vehicleId+"&channel="+channel+"&externalUniqueId="+externalUniqueId;
+                });
+
+            }
+        });
+
+
+
+    });
+</script>
+</html>
