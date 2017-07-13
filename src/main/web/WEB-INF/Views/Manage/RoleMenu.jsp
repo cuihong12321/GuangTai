@@ -1,132 +1,362 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: haoyue001
-  Date: 2016/11/26
-  Time: 15:32
+  User: Admin
+  Date: 2016/6/11
+  Time: 9:00
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String contextPath = request.getContextPath(); %>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <title>权限管理</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="UTF-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <script src="<%=contextPath%>/resources/bower_components/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.spa.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.common.css"/>
-    <link rel="dx-theme" data-theme="generic.light" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.light.css"/>
-    <script src="https://cdn3.devexpress.com/jslib/17.1.3/js/dx.all.js"></script>
-    <style>
-        #gridContainer {
-            height: auto;
-            width: 100%;
-        }
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <title>权限菜单管理</title>
+    <script type="text/javascript" src="<%=contextPath%>/resources/librarys/jquery/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript"
+            src="<%=contextPath%>/resources/librarys/jquery-easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript"
+            src="<%=contextPath%>/resources/librarys/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" href="<%=contextPath%>/resources/librarys/jquery-easyui/themes/bootstrap/easyui.css"/>
+    <link rel="stylesheet" href="<%=contextPath%>/resources/librarys/jquery-easyui/themes/icon.css"/>
+</head>
+<script type="text/javascript">
+    var username = sessionStorage.getItem("username");
+    if(username==null){
+        alert("未检测到您登录，请先登录");
+        location.href = "<%=contextPath%>/";
+    }
 
-        #data-grid-demo {
-            min-height: 530px;
+
+    function addRoleMenu() {
+
+
+        $('#submit').attr("onclick","checkRoleMenu()");
+        $('#dlg').dialog('open').dialog('center').dialog('setTitle', '新增权限菜单');
+        $('#roleid').combobox({
+
+            url: '<%=contextPath%>/Role/GetRole',
+
+            valueField: 'id',
+
+            textField: 'name'
+        });
+        $('#menuid').combobox({
+
+            url: '<%=contextPath%>/Menu/Get',
+
+            valueField: 'id',
+
+            textField: 'name'
+        });
+    }
+
+    function checkRoleMenu() {
+        var roleid;
+        var menuid;
+        var formData = new FormData();
+        var serial = $.trim($("input[name='serial']")[0].value);
+        var describes = $.trim($("input[name='describes']")[0].value);
+        formData.append("roleid",$('#roleid').combobox('getValue'));
+        formData.append("menuid",$('#menuid').combobox('getValue'));
+        formData.append("serial",serial);
+        formData.append("describes", describes);
+        if (serial && describes) {
+            $.ajax({
+                url: "<%=contextPath%>/RoleMenu/Add",
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+
+                    $('#table').datagrid('reload');
+                    $('#dlg').dialog('close');
+                    alert(data);
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+
+
         }
-    </style>
-    <script>
-        var gridDataSource = new DevExpress.data.DataSource({
-            key: "id",
-            loadMode: "raw",
-            load: function() {
-                return $.getJSON("<%=contextPath%>/RoleMenu/GetAll");
+        else {
+            alert("必填项不能为空!");
+        }
+    }
+    function editRoleMenu() {
+
+        $('#submit').attr("onclick", "editcheckRoleMenu()");
+        var row = $("#table").datagrid('getSelected');
+
+        if (row != null) {
+            $('#dlg').dialog('open').dialog('center').dialog('setTitle', '修改权限菜单');
+            $('#roleid').combobox({
+
+                url: '<%=contextPath%>/Role/GetRole',
+
+                valueField: 'id',
+
+                textField: 'name'
+            });
+            $('#menuid').combobox({
+
+                url: '<%=contextPath%>/Menu/Get',
+
+                valueField: 'id',
+
+                textField: 'name'
+            });
+            $("#fm").form("load", row);
+        }
+        else {
+            alert("请选择权限菜单!");
+        }
+    }
+    function editcheckRoleMenu() {
+        var roleid;
+        var menuid;
+        var formData = new FormData();
+        var serial = $.trim($("input[name='serial']")[0].value);
+        var describes = $.trim($("input[name='describes']")[0].value);
+        formData.append("roleid",$('#roleid').combobox('getValue'));
+        formData.append("menuid",$('#menuid').combobox('getValue'));
+        formData.append("serial",serial);
+        formData.append("describes", describes);
+        if (serial && describes) {
+            $.ajax({
+                url: "<%=contextPath%>/RoleMenu/Edit",
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+
+                    $('#table').datagrid('reload');
+                    $('#dlg').dialog('close');
+                    if(data=="Success") {
+                        alert("修改权限菜单成功!");
+                    }
+                    else {
+                        alert("修改权限菜单失败，请重新输入!");
+                    }
+                    return false;
+                },
+                error: function (data) {
+                    alert("修改失败!");
+                    return false;
+                }
+            });
+
+
+        }
+        else {
+            alert("必填项不能为空!");
+        }
+        return;
+    }
+    function getRoles() {
+
+        $.ajax({
+
+            type: 'post',
+
+            url: '<%=contextPath%>/Role/Get',
+
+            dataType: 'JSON',
+
+            success: function (data) {
+
+                var json = eval(data);
+
+                //alert(json.length);
+                if (json.length != 0) {
+                    for (var i = 0; i < json.length; i++) {
+                       // alert(json[i].id);
+
+                    }
+                    $("#roleid").combobox('loadData', json);
+                }
+
+
             },
-            // 插入数据
-            insert: function (values) {
-                return $.ajax({
-                    url: "<%=contextPath%>/RoleMenu/Add/",
-                    method: "POST",
-                    data: values
-                })
-            },
-            //删除数据
-            remove: function (key) {
-                return $.ajax({
-                    url: "<%=contextPath%>/RoleMenu/Delete/" + key,
-                    method: "POST"
-                })
-            },
-            update: function (key, values) {
-                $.ajax({
-                    url: "<%=contextPath%>/RoleMenu/Edit/" + key,
-                    method: "POST",
-                    data: values
-                })
+
+            error: function () {
+
+                alert("error")
+
             }
         });
+    }
+    function getMenus() {
 
-        $(function () {
-            $("#gridContainer").dxTreeList({
-                dataSource: gridDataSource,
-                keyExpr: "id",
-                parentIdExpr: "menuid",
-                editing: {
-                    mode: "popup",
-                    allowUpdating: true,
-                    allowDeleting: true,
-                    allowAdding: true,
-                    popup: {
-                        title: "Employee Info",
-                        showTitle: true,
-                        width: 700,
-                        height: 345,
-                        position: {
-                            my: "top",
-                            at: "top",
-                            of: window
-                        }
+        $.ajax({
+
+            type: 'post',
+
+            url: '<%=contextPath%>/Menu/Get',
+
+            dataType: 'JSON',
+
+            success: function (data) {
+
+                var json = eval(data);
+
+                //alert(json.length);
+                if (json.length != 0) {
+                    for (var i = 0; i < json.length; i++) {
+                        //alert(json[i].id);
+
                     }
-                },
-                showColumnLines: true,
-                showRowLines: true,
-                rowAlternationEnabled: true,
-                showBorders: true,
-                columnAutoWidth: true,
-                selection: {
-                    mode: "multiple"
-                },
-                columns: [
-                    {
-                        dataField: "roleid",
-                        width: 170
-                    },
-                    {
-                        dataField: "menuid",
-                        width: 170
-                    },
-                    {
-                        dataField: "updatetime",
-                        dataType: "date",
-                        width: 170
-                    },
-                    {
-                        dataField: "remark",
-                        width: 170
-                    }
-                ],
-                onCellPrepared: function(e) {
-                    if(e.column.command === "edit") {
-                        e.cellElement.children(".dx-link-add").remove();
-                    }
-                },
-                expandedRowKeys: [2]
-            });
+                    $("#menuid").combobox('loadData', json);
+                }
+
+
+            },
+
+            error: function () {
+
+                alert("error")
+
+            }
         });
-    </script>
-</head>
-<body class="dx-viewport">
-<div class="demo-container">
-    <div class="demo-container">
-        <div id="data-grid-demo">
-            <div id="gridContainer"></div>
-        </div>
-    </div>
+    }
+    function deleteRoleMenu() {
+
+
+        var formData = new FormData();
+        var row = $("#table").datagrid('getSelected');
+        if (row != null) {
+            var roleid = row.rolemenuPK.roleid;
+            var menuid = row.rolemenuPK.menuid;
+            //alert(roleid+","+menuid);
+            formData.append("roleid", roleid);
+            formData.append("menuid", menuid);
+            $.ajax({
+                url: "<%=contextPath%>/RoleMenu/Delete",
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    $('#table').datagrid('reload');
+                    alert("删除权限菜单成功!");
+                },
+                error: function (data) {
+                    alert("删除失败!");
+                }
+            });
+        }
+        else {
+            alert("请选择权限菜单!");
+        }
+
+
+    }
+
+</script>
+<body>
+<script type="text/javascript">
+</script>
+<label for="zhan">数据维护</label>
+<input class="easyui-combobox" id="zhan" name="zhan"/>&nbsp;
+<h2 id="title">数据管理模块</h2><br/>
+
+<table id="table" class="easyui-datagrid" style="width:100%;height:auto"
+       data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:20,url:'<%=contextPath%>/RoleMenu/Get',method:'post'">
+    <thead>
+    <tr>
+        <th data-options="field:'roleid',
+                                  formatter:function(val,row)
+                                  {
+                                  return row.rolemenuPK.roleid;
+                                   }
+                                  ">权限id</th>
+        <th field="role" width=auto>权限</th>
+        <th data-options="field:'menuid',
+                                  formatter:function(val,row)
+                                  {
+                                  return row.rolemenuPK.menuid;
+                                   }
+                                  ">菜单id</th>
+        <th field="menu"width=auto>菜单</th>
+        <th field="serial" width=auto>序号</th>
+        <th field="describes" width=auto>备注</th>
+    </tr>
+
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addRoleMenu()">新增权限菜单
+    </a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteRoleMenu()">移除权限菜单</a>
 </div>
+<div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+     closed="true" buttons="#dlg-buttons">
+    <div class="ftitle">权限菜单</div>
+    <form id="fm" method="post" novalidate="false">
+        <div class="fitem">
+            <label>权限</label>
+            <input id="roleid"  name="roleid"  class="easyui-combobox"    required="true"  style="width:160px;"   >
+        </div>
+        <div class="fitem">
+            <label>菜单</label>
+            <input id="menuid"  name="menuid"  class="easyui-combobox"    required="true"  style="width:160px;"   >
+        </div>
+        <div class="fitem">
+            <label>序号</label>
+            <input name="serial"  class="easyui-numberbox" data-options="missingMessage:'请输入数字'" required="true">
+        </div>
+        <div class="fitem">
+            <label>备注</label>
+            <input name="describes" class="easyui-textbox" required="true">
+        </div>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a id="submit" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok"
+
+       style="width:90px">Save</a>
+    <a id="cancel" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
+       onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
+</div>
+
+<style type="text/css">
+    #fm {
+        margin: 0;
+        padding: 10px 30px;
+    }
+
+    .ftitle {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .fitem {
+        margin-bottom: 5px;
+    }
+
+    .fitem label {
+        display: inline-block;
+        width: 80px;
+    }
+
+    .fitem input {
+        width: 160px;
+    }
+</style>
+
+
 </body>
 </html>

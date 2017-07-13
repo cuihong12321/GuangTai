@@ -1,459 +1,302 @@
+<%@ page import="java.time.LocalDate" %>
 <%--
   Created by IntelliJ IDEA.
-  User: haoyue001
-  Date: 2016/11/26
-  Time: 11:18
+  User: Brooks
+  Date: 2015-11-28
+  Time: 13:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String contextPath = request.getContextPath(); %>
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta menuname="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta menuname="description" content="Xenon Boostrap Admin Panel" />
-    <meta menuname="author" content="" />
-    <title>江苏金润润滑油后台主页</title>
-    <link rel="stylesheet" href="<%=contextPath%>/resources/bower_components/font-awesome/css/font-awesome.min.css">
-    <%--<link rel="stylesheet" href="<%=contextPath%>/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">--%>
-    <link rel="stylesheet" href="<%=contextPath%>/resources/styles/xenon-core.css">
-    <link rel="stylesheet" href="<%=contextPath%>/resources/styles/xenon-forms.css">
-    <link rel="stylesheet" href="<%=contextPath%>/resources/styles/xenon-components.css">
-    <link rel="stylesheet" href="<%=contextPath%>/resources/styles/xenon-skins.css">
-    <link rel="stylesheet" href="<%=contextPath%>/resources/styles/custom.css">
-    <link rel="stylesheet" href="<%=contextPath%>/resources/styles/pc-index.css">
-    <script src="<%=contextPath%>/resources/librarys/nav/jquery-1.8.3.min.js"></script>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <title>数据管理</title>
+    <script type="text/javascript" src="<%=contextPath%>/resources/librarys/jquery/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript"
+            src="<%=contextPath%>/resources/librarys/jquery-easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript"
+            src="<%=contextPath%>/resources/librarys/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" href="<%=contextPath%>/resources/librarys/jquery-easyui/themes/bootstrap/easyui.css"/>
+    <link rel="stylesheet" href="<%=contextPath%>/resources/librarys/jquery-easyui/themes/icon.css"/>
+    <script type="text/javascript">
+        var username = sessionStorage.getItem("username");
+        if (username == null) {
+            alert("未检测到您登录，请先登录");
+            location.href = "<%=contextPath%>/";
+        }
+        var task;
+        <%   Object  menulist;%>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="<%=contextPath%>/resources/librarys/bootstrap/js/html5shiv.js"></script>
-    <script src="<%=contextPath%>/resources/librarys/bootstrap/js/respond.js"></script>
-    <![endif]-->
-    <script>
-        function myFunction(){
-            if (confirm("确认要退出登录吗？")){
-                window.location.href="<%=contextPath%>/";
+
+        $(function () {
+            var formData = new FormData();
+            var name = sessionStorage.getItem("username");
+            var roleid = sessionStorage.getItem("roleid");
+            formData.append("roleid", roleid);
+            $.ajax({
+                url: "<%=contextPath%>/Menu/Gettest",
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    menulist = eval(data);
+                    for (var i = 0; i < menulist.length; i++) {
+                        if (menulist[i].url.indexOf("ForGround") == 1) {
+                            $('<img/>', {
+                                src: "<%=contextPath%>/resources/images/" + menulist[i].icon,
+                                title: menulist[i].name,
+                                onclick: "javascript:{addTab(" +
+                                "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
+                            }).appendTo($("#menus"));
+                            $('<br/><br/>').appendTo($("#menus"));
+                            $('<a />', {
+                                id: "a" + i,
+                                text: menulist[i].name,
+                                href: "javascript:{addTab(" +
+                                "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}",
+                            }).appendTo($("#menus"));
+                            $('<br/><br/>').appendTo($("#menus"));
+                        }
+                        if (menulist[i].url.indexOf("BulkCargo") == 1) {
+                            $('<img/>', {
+                                src: "<%=contextPath%>/resources/images/" + menulist[i].icon,
+                                title: menulist[i].name,
+                                onclick: "javascript:{addTab(" +
+                                "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
+                            }).appendTo($("#bulkcargomanage"));
+                            $('<br/><br/>').appendTo($("#bulkcargomanage"));
+                            $('<a />', {
+                                id: "a" + i,
+                                text: menulist[i].name,
+                                href: "javascript:{addTab(" +
+                                "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
+
+                            }).appendTo($("#bulkcargomanage"));
+
+                            $('<br/><br/>').appendTo($("#bulkcargomanage"));
+                        }
+
+                        if (menulist[i].url.indexOf("BackGround") == 1) {
+                            $('<img/>', {
+                                src: "<%=contextPath%>/resources/images/" + menulist[i].icon,
+                                title: menulist[i].name,
+                                onclick: "javascript:{addTab(" +
+                                "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
+                            }).appendTo($("#backgroundmanage"));
+                            $('<br/><br/>').appendTo($("#backgroundmanage"));
+                            $('<a />', {
+                                id: "a" + i,
+                                text: menulist[i].name,
+                                href: "javascript:{addTab(" +
+                                "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
+                            }).appendTo($("#backgroundmanage"));
+                            $('<br/><br/>').appendTo($("#backgroundmanage"));
+                        }
+
+                        if (menulist[i].url.indexOf("AccountManage") == 1) {
+                            $('<img/>', {
+                                src: "<%=contextPath%>/resources/images/" + menulist[i].icon,
+                                title: menulist[i].name,
+                                onclick: "javascript:{addTab(" +
+                                "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
+                            }).appendTo($("#accountmanage"));
+                            $('<br/><br/>').appendTo($("#accountmanage"));
+                            $('<a />', {
+                                id: "a" + i,
+                                text: menulist[i].name,
+                                href: "javascript:{addTab(" +
+                                "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
+
+                            }).appendTo($("#accountmanage"));
+
+                            $('<br/><br/>').appendTo($("#accountmanage"));
+                        }
+
+
+
+                    }
+                }
+            });
+        });
+
+        function addTab(title, url) {
+            if ($('#content').tabs('exists', title)) {
+                $('#content').tabs('select', title);
+
+                if (title == "") {
+                    $('#layout').layout('expand', 'east');
+                } else {
+                    $('#layout').layout('collapse', 'east');
+                }
+            } else {
+                if (title == "") {
+                    $('#content').tabs('add', {
+                        title: title,
+                        href: url,
+                        closable: true
+                    });
+
+                    $('#layout').layout('expand', 'east');
+                } else {
+                    var content = '<iframe scrolling="auto" frameborder="0" src="' + url + '" style="width:100%;height:100%;"></iframe>';
+                    $('#content').tabs('add', {
+                        title: title,
+                        content: content,
+                        closable: true
+                    });
+
+                    $('#layout').layout('collapse', 'east');
+                }
             }
         }
+
+        function updateTab(title, url) {
+            if ($('#content').tabs('exists', title)) {
+                var tab = $('#content').tabs('getTab', title);
+                $("#content").tabs('update', {
+                    tab: tab,
+                    options: {
+                        href: url
+                    }
+                });
+                tab.panel('refresh');
+            }
+        }
+
+        function startCount(title, url) {
+            updateTab(title, url);
+
+            task = setTimeout("startCount('" + title + "', '" + url + "')", 90000);
+        }
     </script>
-    <style>
-        .sidebar-menu .main-menu {
-            padding: 0;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            list-style: none;
+    <style type="text/css">
+
+        #north {
+            height: 130px;
+            text-align: center;
+            font-size: 50px;
+            vertical-align: middle;
+            color: white;
+            background: url("<%=contextPath%>/resources/images/login-bg-img.jpg") no-repeat;
         }
-        .sidebar-menu .main-menu ul li a {
-            padding-left: 70px;
+
+        #home {
+            background: url("<%=contextPath%>/resources/images/banner.png") no-repeat;
+            background-size: cover;
+            padding-top: 50px;
+            padding-left: 50px;
+            font-size: 30px;
+            color: blue;
         }
-        .sidebar-menu .main-menu a {
-            padding: 13px 30px;
+
+        .welcome {
+            font-size: 49px;
+            font-weight: bold;
+            font-family: "Microsoft YaHei";
+            -webkit-text-stroke: 2px #6694b9;
+            letter-spacing: 3px;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .title a {
+            font-family: '微软雅黑';
+            font-size: 16px;
+            color: #6694b9;
+            text-decoration: none;
+        }
+
+        #south {
+            margin: 0 auto auto auto;
+        }
+
+        #copyright {
+            text-align: center;
+            vertical-align: middle;
+            color: #fff;
+            background: url("<%=contextPath%>/resources/images/login-bg-img.jpg") no-repeat;
+            height: 100%;
+            line-height: 1.6;
+            font-size: 14px;
+            font-family: '微软雅黑';
+        }
+
+        #north p {
+            margin: 0 !important;
+            line-height: 2.2;
+            font-family: '微软雅黑';
+            font-size: 40px;
+        }
+
+        #menus img {
+            width: 76px;
+        }
+
+        #bulkcargomanage img {
+            width: 76px;
+        }
+
+        #backgroundmanage img {
+            width: 76px;
+        }
+
+        #accountmanage img {
+            width: 76px;
+        }
+
+        .accordion .accordion-header-selected {
+            background: #6694b9;
         }
     </style>
 </head>
-<body class="page-body">
-<div class="page-container">
-    <div class="sidebar-menu toggle-others fixed">
-        <div class="sidebar-menu-inner">
-            <header class="logo-env">
-                <!-- logo -->
-                <div class="logo">
-                    <a href="#" class="logo-expanded">
-                        <img src="<%=contextPath%>/resources/images/index-pc-header-logo.png">
-                    </a>
-                    <a href="#" class="logo-collapsed">
-                        <img src="<%=contextPath%>/resources/images/1.png" width="40" alt="" />
-                    </a>
-                </div>
-                <!-- This will toggle the mobile menu and will be visible only on mobile devices -->
-                <%--<div class="mobile-menu-toggle visible-xs">--%>
-                    <%--<a href="#" data-toggle="user-info-menu">--%>
-                        <%--<i class="fa-bell-o"></i>--%>
-                        <%--<span class="badge badge-success">7</span>--%>
-                    <%--</a>--%>
-
-                    <%--<a href="#" data-toggle="mobile-menu">--%>
-                        <%--<i class="fa-bars"></i>--%>
-                    <%--</a>--%>
-                <%--</div>--%>
-            </header>
-            <ul id="main-menu" class="main-menu">
-                <!-- add class "multiple-expanded" to allow multiple submenus to open -->
-                <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-                <li>
-                    <a href="#">
-                        <%--onclick="addActive(this);"--%>
-                        <i class="linecons-cog"></i>
-                        <span class="title">首页</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="linecons-database"></i>
-                        <span class="title">首页轮播管理</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="<%=contextPath%>/HomeCarouse/" target="aaa">
-                                <span class="title">首页轮播</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <%--onclick="addActive(this);"--%>
-                        <i class="linecons-desktop"></i>
-                        <span class="title">账号管理</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="<%=contextPath%>/User/" target="aaa">
-                                <span class="title">用户管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/Role/" target="aaa">
-                                <span class="title">角色管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/Menu/" target="aaa">
-                                <span class="title">菜单管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/RoleMenu/" target="aaa">
-                                <span class="title">权限管理</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="linecons-database"></i>
-                        <span class="title">银行卡管理</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="<%=contextPath%>/Bank/" target="aaa">
-                                <span class="title">银行管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/BankCard/" target="aaa">
-                                <span class="title">用户银行卡管理</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="linecons-note"></i>
-                        <span class="title">汽车管理</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="<%=contextPath%>/Car/" target="aaa">
-                                <span class="title">汽车管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/Carbrand/" target="aaa">
-                                <span class="title">汽车品牌管理</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="<%=contextPath%>/CarCompany/" target="aaa">
-                                <span class="title">汽车厂商管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/CarSeries/" target="aaa">
-                                <span class="title">车系管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/Cartype/" target="aaa">
-                                <span class="title">汽车车型管理</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="linecons-database"></i>
-                        <span class="title">服务管理</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="<%=contextPath%>/Region/" target="aaa">
-                                <span class="title">区域管理</span>
-                            </a>
-                        </li>
-                        <%--<li>--%>
-                        <%--<a href="<%=contextPath%>/Services/" target="aaa">--%>
-                        <%--<span class="title">服务管理</span>--%>
-                        <%--</a>--%>
-                        <%--</li>--%>
-                        <%--<li>--%>
-                        <%--<a href="<%=contextPath%>/ServiceType/" target="aaa">--%>
-                        <%--<span class="title">服务类型管理</span>--%>
-                        <%--</a>--%>
-                        <%--</li>--%>
-                        <li>
-                            <a href="<%=contextPath%>/ServiceProvider/" target="aaa">
-                                <span class="title">服务商管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/RegionPrice/" target="aaa">
-                                <span class="title">地区价格管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/RegionSubsidy/" target="aaa">
-                                <span class="title">地区补助管理</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="linecons-database"></i>
-                        <span class="title">库存管理</span>
-                    </a>
-                    <ul>
-                        <%--<li>--%>
-                            <%--<a href="<%=contextPath%>/Inventory/" target="aaa">--%>
-                                <%--<span class="title">库存记录</span>--%>
-                            <%--</a>--%>
-                        <%--</li>--%>
-                            <li>
-                                <a href="<%=contextPath%>/UserProductBg/" target="aaa">
-                                    <span class="title">总库存</span>
-                                </a>
-                            </li>
-                        <li>
-                            <a href="<%=contextPath%>/InventoryRecord/" target="aaa">
-                                <span class="title">库存记录</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="linecons-database"></i>
-                        <span class="title">券管理</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="<%=contextPath%>/TicketSeries/" target="aaa">
-                                <span class="title">劵系列</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/MaintainTicket/" target="aaa">
-                                <span class="title">用户所持保养券</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/TicketMaster/" target="aaa">
-                                <span class="title">劵订单</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/MaintainTicketMasterBg/" target="aaa">
-                                <span class="title">保养券管理</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="<%=contextPath%>/MaintainTicketMasterDetailBg/" target="aaa">
-                                <span class="title">保养券细则管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/MaintainTicketOrderMaster/" target="aaa">
-                                <span class="title">保养券订单管理</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="<%=contextPath%>/CouponTicket/" target="aaa">
-                                <span class="title">优惠券</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="<%=contextPath%>/CouponTicketOrder/" target="aaa">
-                                <span class="title">优惠券订单</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <span class="title">劵订单详情</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="linecons-database"></i>
-                        <span class="title">保养套餐管理</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="<%=contextPath%>/Product/" target="aaa">
-                                <span class="title">产品管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/PackageMaster/" target="aaa">
-                                <span class="title">套餐管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/PackageDetail/" target="aaa">
-                                <span class="title">套餐明细管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/PackageType/" target="aaa">
-                                <span class="title">套餐类型管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/ProductType/" target="aaa">
-                                <span class="title">产品类型管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/ProductSeries/" target="aaa">
-                                <span class="title">产品系列管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/PackageOrderMaster/" target="aaa">
-                                <span class="title">订单记录管理</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/MaintainOrder/" target="aaa">
-                                <span class="title">保养记录管理</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="<%=contextPath%>/PackageStatistics/" target="aaa">
-                                <span class="title">套餐换油统计</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="<%=contextPath%>/SaleStatistice/" target="aaa">
-                                <span class="title">爱车无限销售汇总</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/Sale/" target="aaa">
-                                <span class="title">总代总金额</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/SaleDetailList/" target="aaa">
-                                <span class="title">总代销售明细</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="linecons-database"></i>
-                        <span class="title">流水记录管理</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="<%=contextPath%>/DealRecord/" target="aaa">
-                                <span class="title">交易记录</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<%=contextPath%>/DealType/" target="aaa">
-                                <span class="title">交易类型</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-
-
-            </ul>
+<body>
+<div id="layout" class="easyui-layout" style="width:100%;height:100%;">
+    <div id="north" data-options="region:'north',split:true" title="公司信息">
+        <div>
+            <p class="north">广泰精密冲压(苏州)有限公司</p>
         </div>
     </div>
-    <div class="main-content">
-        <!-- User Info, Notifications and Menu Bar -->
-        <nav class="navbar user-info-navbar" role="navigation">
+    <div data-options="region:'west',split:true" title="功能菜单" style="width:200px;">
+        <div class="easyui-accordion" data-options="fit:true,border:false">
+            <div id="menus" class="title" title="预约登记" data-options="selected:true" style="padding:10px;">
 
-            <!-- Left links for user info navbar -->
-            <ul class="user-info-menu left-links list-inline list-unstyled">
+            </div>
+            <div id="bulkcargomanage" class="title" title="访客管理" style="padding:10px;">
 
-                <li class="hidden-sm hidden-xs">
-                    <a href="#" data-toggle="sidebar">
-                        <i class="fa-bars"></i>
-                    </a>
-                </li>
-            </ul>
-            <!-- Right links for user info navbar -->
-            <ul class="user-info-menu right-links list-inline list-unstyled">
-                <li class="dropdown user-profile">
-                    <a href="#">
-                        <img src="<%=contextPath%>/resources/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
-                        <span>
-                            ${UserName}
-                        </span>
-                    </a>
-                </li>
+            </div>
+            <div id="backgroundmanage" class="title" title="数据管理" style="padding:10px;">
 
-                <li>
-                    <a id="exit" onclick="myFunction()">
-                        <i class="fa-power-off"></i>
-                    </a>
-                </li>
+            </div>
+            <div id="accountmanage" class="title" title="账户管理" style="padding:10px;">
 
-            </ul>
-
-        </nav>
-
-        <%--内嵌--%>
-        <iframe name="aaa" style="width: 100%;height: 90%;margin-top: 76px;border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center'">
+        <div id="content" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+            <div id="home" title="主页" style="padding:10px">
+                <p class="welcome">欢迎使用本系统!</p>
+            </div>
+        </div>
+    </div>
+    <div id="south" data-options="region:'south',split:true" title="版权信息" style="height:100px;">
+        <div id="copyright">
+            广泰精密冲压(苏州)有限公司 版本号：V1.01<br>
+            Copyright © <%=LocalDate.now().getYear()%> GuangTai.<br>
+            广泰·苏州 版权所有.
+        </div>
     </div>
 </div>
-
-<!-- Bottom Scripts -->
-<%--<script src="<%=contextPath%>/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>--%>
-<script src="<%=contextPath%>/resources/js/TweenMax.min.js"></script>
-<script src="<%=contextPath%>/resources/js/resizeable.js"></script>
-<script src="<%=contextPath%>/resources/js/joinable.js"></script>
-<script src="<%=contextPath%>/resources/js/xenon-api.js"></script>
-<script src="<%=contextPath%>/resources/js/xenon-toggles.js"></script>
-
-<!-- Imported scripts on this page -->
-<!--<script src="<%=contextPath%>/resources/js/rwd-table.min.js"></script>-->
-<!-- JavaScripts initializations and stuff -->
-<script src="<%=contextPath%>/resources/js/xenon-custom.js"></script>
-<script>
-    $(function(){
-        var nav_width = $('.sidebar-menu').width();
-        var doc_width = $(document).width();
-        $('.user-info-navbar').width(doc_width-nav_width);
-        $('footer.main-footer').width(doc_width-nav_width);
-
-    });
-</script>
 </body>
 </html>

@@ -51,7 +51,6 @@
                 ],
                 "columns": [
                     {"data": "id"},
-                    {"data": "parent"},
                     {"data": "name"},
                     {"data": "remark"}
                 ]
