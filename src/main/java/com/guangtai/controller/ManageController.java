@@ -1,6 +1,7 @@
 package com.guangtai.controller;
 
 
+import com.guangtai.model.ResultModels;
 import com.guangtai.model.domain.User;
 import com.guangtai.service.RoleMenuService;
 import com.guangtai.service.RoleService;
@@ -50,19 +51,20 @@ public class ManageController {
     @RequestMapping(value = "/ManageLogin")
     @ResponseBody
     public String ManageLogin(HttpServletRequest request) {
-        ResultModel<String> resultModel = new ResultModel<>();
+        ResultModels<String> resultModels = new ResultModels<>();
         try {
             User user = userService.getByUserNameAndPassword(request.getParameter("username"), SecurityUtil.encrypt(request.getParameter("password"), SecurityUtil.AlgorithmType.SHA512));
 
             if (user == null) {
-                resultModel.setSuccess(false);
-                resultModel.setData("用户名或密码错误!");
+                resultModels.setSuccess(false);
+                resultModels.setData("用户名或密码错误!");
             } else {
-                resultModel.setSuccess(true);
-                resultModel.setData(String.valueOf(user.getId()));
+                resultModels.setSuccess(true);
+                resultModels.setData("登陆成功！");
+                resultModels.setUser(user);
             }
 
-            return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
+            return SystemUtil.getObjectMapper().writeValueAsString(resultModels);
         } catch (Exception e) {
             return e.getMessage();
         }

@@ -22,6 +22,14 @@
     <link rel="stylesheet" href="<%=contextPath%>/resources/librarys/jquery-easyui/themes/bootstrap/easyui.css"/>
     <link rel="stylesheet" href="<%=contextPath%>/resources/librarys/jquery-easyui/themes/icon.css"/>
 </head>
+<style>
+    .login-content-description{
+        padding:0;
+        text-align: center;
+        margin: 0;
+        margin-top: 300px;
+    }
+</style>
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -29,47 +37,37 @@
 
             var username = $("#username").val();
             var password = $("#password").val();
-            if (username == "") {
+            if ($("#username").val() == "") {
                 alert("用户名不能为空!");
-                return false;
+                return;
             }
-            else if (password == "") {
+            if ($("#password").val() == "") {
                 alert("密码不能为空!");
-                return false;
-            } else {
-                $.ajax({
-                    url: "<%=contextPath%>/Manage/ManageLogin",
-                    type: 'POST',
-                    dataType: "json",
-                    cache: false,
-                    data: {
-                        username: username,
-                        password: password
-                    },
-                    success: function (data) {
-
-                        if (data) {
-                            alert("用户名或密码错误!");
-                            location.href = "/";
-                            return false;
-                        } else {
-                            var json = eval("(" + data + ")");
-                            sessionStorage.setItem("username", json.username);
-                            sessionStorage.setItem("roleid", json.roleid);
-                            sessionStorage.setItem("id", json.id);
-                            alert("登录成功!");
-                            sessionStorage.setItem("username", username);
-                            location.href = "<%=contextPath%>/Manage/Index?username=" + username;
-                            return false;
-                        }
-                    },
-                    error: function (data) {
-
-                    }
-                });
-
+                return;
             }
-            return false;
+            $.ajax({
+                url: "<%=contextPath%>/Manage/ManageLogin",
+                type: 'POST',
+                dataType: "json",
+                cache: false,
+                data: {
+                    username: username,
+                    password: password
+                },
+                success: function (data) {
+                    if (data.success) {
+                        sessionStorage.setItem("roleid", data.user.roleid);
+                        sessionStorage.setItem("id", data.user.id);
+                        sessionStorage.setItem("username", data.user.username);
+                        window.location.href = "<%=contextPath%>/Manage/Index?username=" + username;
+                    } else {
+                        alert(data.data);
+                    }
+                },
+                error: function (data) {
+                    alert(data.data);
+                }
+            });
         });
         $("#resetbtn").click(function () {
             $('#ff').form('clear');
@@ -79,14 +77,17 @@
 
 </script>
 <body style="min-width: 1200px;">
-<!--头部-->
+<div>
 
+</div>
 <!--内容-->
 <div class="login-background-box">
     <div class="login-content">
         <div class="login-content-description">
             <form id="ff" method="post">
-                <p>用户登录</p>
+                <div class="login-content-input form-group">
+                    <h1 style="text-align: center">用户登录</h1>
+                </div>
                 <div class="login-content-input form-group">
                     <i class="fa fa-user login-content-icon fa-lg"></i>
                     <input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名">
@@ -105,7 +106,12 @@
                             </label>
                         </div>
                     </div>
-                    <div class="login-main-forget"><a href="#">忘记密码？</a></div>
+                    <div class="fl fr">
+                        <div class="checkbox login-main-checkbox fr">
+                            <div class="login-main-forget fr"><a href="#">忘记密码？</a></div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="login-content-input form-group">
                     <button id="loginbtn" class="btn login-content-button mt15">登录</button>
