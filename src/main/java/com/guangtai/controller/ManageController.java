@@ -31,11 +31,6 @@ public class ManageController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/")
-    public String Login() {
-        return "Manage/Login";
-    }
-
     @RequestMapping(value = "/Index")
     public ModelAndView Index(@RequestParam String username) {
 

@@ -32,18 +32,16 @@
 
 
         $(function () {
-            var formData = new FormData();
-            var name = sessionStorage.getItem("username");
+            var username = sessionStorage.getItem("username");
             var roleid = sessionStorage.getItem("roleid");
-            formData.append("roleid", roleid);
             $.ajax({
                 url: "<%=contextPath%>/Menu/Gettest",
                 type: 'POST',
-                data: formData,
+                data: {
+                    roleid: roleid
+                },
                 dataType: 'json',
                 cache: false,
-                contentType: false,
-                processData: false,
                 success: function (data) {
                     menulist = eval(data);
                     for (var i = 0; i < menulist.length; i++) {
@@ -82,7 +80,7 @@
                             $('<br/><br/>').appendTo($("#bulkcargomanage"));
                         }
 
-                        if (menulist[i].url.indexOf("BackGround") == 1) {
+                        if (menulist[i].url.indexOf("Manage") == 1) {
                             $('<img/>', {
                                 src: "<%=contextPath%>/resources/images/" + menulist[i].icon,
                                 title: menulist[i].name,
@@ -117,7 +115,6 @@
 
                             $('<br/><br/>').appendTo($("#accountmanage"));
                         }
-
 
 
                     }

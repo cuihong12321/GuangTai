@@ -1,8 +1,10 @@
 package com.guangtai.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.guangtai.model.domain.RoleMenu;
 import com.guangtai.model.domain.Menu;
 import com.guangtai.service.MenuService;
+import com.guangtai.service.RoleMenuService;
 import io.ruibu.model.ResultModel;
 import io.ruibu.util.SystemUtil;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +33,9 @@ public class MenuController {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private RoleMenuService roleMenuService;
 
     @RequestMapping(value = "/")
     public ModelAndView Index() {
@@ -46,11 +54,32 @@ public class MenuController {
         }
     }
 
+    @RequestMapping("/Gettest")
+    @ResponseBody
+    public void getMenutest(HttpServletRequest request, HttpServletResponse response) {
+        Integer roleid = Integer.parseInt(request.getParameter("roleid"));
+
+        try {
+            List<Menu> menulist = new ArrayList<>();
+            List<RoleMenu> roleMenulist = roleMenuService.getRoleMenu(roleid);
+            Menu menu;
+            for (RoleMenu roleMenu : roleMenulist) {
+                menu = menuService.getById(Menu.class,roleMenu.getMenuid());
+                menulist.add(menu);
+                System.out.print(roleMenu);
+            }
+            System.out.print(menulist);
+            response.getWriter().write(SystemUtil.getObjectMapper().writeValueAsString(menulist));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     //添加工厂
     @RequestMapping(value = "/Add")
     @ResponseBody
     public String Add(HttpServletRequest request,
-                      @RequestParam(required = false) String image,
+                      @RequestParam(required = false) String icon,
                       @RequestParam(required = false) String name,
                       @RequestParam(required = false) String url,
                       @RequestParam(required = false) String parentid,
@@ -60,6 +89,10 @@ public class MenuController {
         try {
             Menu menu = new Menu();
 
+            if (icon != null) {
+                menu.setIcon(icon);
+            }
+
             if (name != null) {
                 menu.setName(name);
             }
@@ -68,11 +101,15 @@ public class MenuController {
                 menu.setUrl(url);
             }
 
+            if (parentid != null) {
+                menu.setParentid(Integer.valueOf(parentid));
+            }
+
             if (remark != null) {
                 menu.setRemark(remark);
             }
 
-            menu.setUpdatetime(LocalDateTime.now().toString());
+            menu.setUpdatetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             //执行修改添加方法
             menuService.add(menu);
 
@@ -99,7 +136,7 @@ public class MenuController {
     @RequestMapping(value = "/Edit/{id}")
     @ResponseBody
     public String Edit(HttpServletRequest request, @PathVariable String id,
-                       @RequestParam(required = false) String image,
+                       @RequestParam(required = false) String icon,
                        @RequestParam(required = false) String name,
                        @RequestParam(required = false) String url,
                        @RequestParam(required = false) String parentid,
@@ -109,6 +146,10 @@ public class MenuController {
         try {
             Menu menu = menuService.getById(Menu.class, Integer.valueOf(id));
 
+            if (icon != null) {
+                menu.setIcon(icon);
+            }
+
             if (name != null) {
                 menu.setName(name);
             }
@@ -117,11 +158,15 @@ public class MenuController {
                 menu.setUrl(url);
             }
 
+            if (parentid != null) {
+                menu.setParentid(Integer.valueOf(parentid));
+            }
+
             if (remark != null) {
                 menu.setRemark(remark);
             }
 
-            menu.setUpdatetime(LocalDateTime.now().toString());
+            menu.setUpdatetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             //执行修改方法
             menuService.edit(menu);
 

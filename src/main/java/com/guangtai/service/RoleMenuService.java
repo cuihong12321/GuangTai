@@ -1,5 +1,6 @@
 package com.guangtai.service;
 
+import com.guangtai.model.RoleMenuTreeModel;
 import com.guangtai.model.domain.RoleMenu;
 
 import java.util.List;
@@ -8,15 +9,17 @@ import java.util.List;
  * Created by Ruibu003 on 2017/6/5.
  */
 public interface RoleMenuService {
-
     List<RoleMenu> getRoleMenu();
 
-    RoleMenu getById(Class<RoleMenu> roleMenu, int id);
+    List<Integer> getMenuList(int roleid);
 
-    void add(RoleMenu roleMenu);
+    List<RoleMenuTreeModel> getRoleMenuList(int roleid);
 
-    void edit(RoleMenu roleMenu);
+    List<RoleMenu> getRoleMenu(int roleid);
 
-    void delete(RoleMenu roleMenu);
+    void addRoleMenu(RoleMenu roleMenu);
 
+    void editRoleMenu(RoleMenu roleMenu);
+
+    void delRoleMenu(RoleMenu roleMenu);
 }

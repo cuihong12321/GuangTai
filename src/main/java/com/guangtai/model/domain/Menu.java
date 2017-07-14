@@ -2,6 +2,9 @@ package com.guangtai.model.domain;
 
 import javax.persistence.*;
 
+/**
+ * Created by Ruibu003 on 2017/6/5.
+ */
 @Entity
 @Table(name = "menu", schema = "guangtai", catalog = "")
 public class Menu {
@@ -9,11 +12,12 @@ public class Menu {
     private String icon;
     private String name;
     private String url;
+    private Integer parentid;
     private String updatetime;
     private String remark;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -23,7 +27,7 @@ public class Menu {
     }
 
     @Basic
-    @Column(name = "icon", nullable = true, length = 2000)
+    @Column(name = "icon")
     public String getIcon() {
         return icon;
     }
@@ -33,7 +37,7 @@ public class Menu {
     }
 
     @Basic
-    @Column(name = "name", nullable = true, length = 50)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -43,7 +47,7 @@ public class Menu {
     }
 
     @Basic
-    @Column(name = "url", nullable = true, length = 2000)
+    @Column(name = "url")
     public String getUrl() {
         return url;
     }
@@ -53,7 +57,17 @@ public class Menu {
     }
 
     @Basic
-    @Column(name = "updatetime", nullable = true)
+    @Column(name = "parentid")
+    public Integer getParentid() {
+        return parentid;
+    }
+
+    public void setParentid(Integer parentid) {
+        this.parentid = parentid;
+    }
+
+    @Basic
+    @Column(name = "updatetime")
     public String getUpdatetime() {
         return updatetime;
     }
@@ -63,7 +77,7 @@ public class Menu {
     }
 
     @Basic
-    @Column(name = "remark", nullable = true, length = 2000)
+    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
@@ -83,6 +97,7 @@ public class Menu {
         if (icon != null ? !icon.equals(menu.icon) : menu.icon != null) return false;
         if (name != null ? !name.equals(menu.name) : menu.name != null) return false;
         if (url != null ? !url.equals(menu.url) : menu.url != null) return false;
+        if (parentid != null ? !parentid.equals(menu.parentid) : menu.parentid != null) return false;
         if (updatetime != null ? !updatetime.equals(menu.updatetime) : menu.updatetime != null) return false;
         if (remark != null ? !remark.equals(menu.remark) : menu.remark != null) return false;
 
@@ -95,6 +110,7 @@ public class Menu {
         result = 31 * result + (icon != null ? icon.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + (parentid != null ? parentid.hashCode() : 0);
         result = 31 * result + (updatetime != null ? updatetime.hashCode() : 0);
         result = 31 * result + (remark != null ? remark.hashCode() : 0);
         return result;

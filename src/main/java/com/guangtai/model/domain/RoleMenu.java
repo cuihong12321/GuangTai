@@ -3,7 +3,7 @@ package com.guangtai.model.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "relomenu", schema = "guangtai", catalog = "")
+@Table(name = "rolemenu", schema = "guangtai", catalog = "")
 @IdClass(RoleMenuPK.class)
 public class RoleMenu {
     private int roleid;

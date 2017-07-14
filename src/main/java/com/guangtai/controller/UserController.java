@@ -1,21 +1,25 @@
 package com.guangtai.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.guangtai.model.domain.Role;
 import com.guangtai.model.domain.User;
 import com.guangtai.service.*;
 import io.ruibu.model.ResultModel;
 import io.ruibu.model.wechat.UnionUserModel;
 import io.ruibu.util.*;
 import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -26,32 +30,32 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/User")
 public class UserController {
 
-    @Resource
-    private UserService userService;
-
-    @Resource
-    private RoleService roleService;
-
-    @RequestMapping(value = "/IsSubscribe")
-    @ResponseBody
-    public String IsSubscribe(HttpServletRequest request) {
-        try {
-            UnionUserModel unionUserModel = WeChatUtil.getUnionUser(request.getParameter("openid"));
-            ResultModel<String> resultModel = new ResultModel<>();
-            if (unionUserModel.getSubscribe() == 1) {
-                resultModel.setSuccess(true);
-                resultModel.setData("已关注！");
-            } else {
-                resultModel.setSuccess(false);
-                resultModel.setData("请关注【挣点油钱】公众号再访问！");
-            }
-            return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
-        } catch (JsonProcessingException e) {
-            LogManager.getLogger().error(e.toString());
-        }
-
-        return "";
-    }
+//    @Resource
+//    private UserService userService;
+//
+//    @Resource
+//    private RoleService roleService;
+//
+//    @RequestMapping(value = "/IsSubscribe")
+//    @ResponseBody
+//    public String IsSubscribe(HttpServletRequest request) {
+//        try {
+//            UnionUserModel unionUserModel = WeChatUtil.getUnionUser(request.getParameter("openid"));
+//            ResultModel<String> resultModel = new ResultModel<>();
+//            if (unionUserModel.getSubscribe() == 1) {
+//                resultModel.setSuccess(true);
+//                resultModel.setData("已关注！");
+//            } else {
+//                resultModel.setSuccess(false);
+//                resultModel.setData("请关注【挣点油钱】公众号再访问！");
+//            }
+//            return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
+//        } catch (JsonProcessingException e) {
+//            LogManager.getLogger().error(e.toString());
+//        }
+//
+//        return "";
+//    }
 
 //    @RequestMapping(value = "/AddUser")
 //    @ResponseBody
@@ -451,17 +455,17 @@ public class UserController {
 //    }
 
 
-    @RequestMapping(value = "/GetUser")
-    @ResponseBody
-    public String GetUser(HttpServletRequest request) {
-        int userid = Integer.parseInt(request.getParameter("userid"));
-        User u = userService.getById(User.class, userid);
-        try {
-            return SystemUtil.getObjectMapper().writeValueAsString(u);
-        } catch (JsonProcessingException e) {
-            return e.getMessage();
-        }
-    }
+//    @RequestMapping(value = "/GetUser")
+//    @ResponseBody
+//    public String GetUser(HttpServletRequest request) {
+//        int userid = Integer.parseInt(request.getParameter("userid"));
+//        User u = userService.getById(User.class, userid);
+//        try {
+//            return SystemUtil.getObjectMapper().writeValueAsString(u);
+//        } catch (JsonProcessingException e) {
+//            return e.getMessage();
+//        }
+//    }
 
 //    //添加用户
 //    @RequestMapping(value = "/Add")
@@ -715,20 +719,101 @@ public class UserController {
 //        return "";
 //    }
 
-    //删除用户
-    @RequestMapping(value = "/Delete")
+//    //删除用户
+//    @RequestMapping(value = "/Delete")
+//    @ResponseBody
+//    public String delete(@RequestParam int id) {
+//        ResultModel<String> resultModel = new ResultModel<>();
+//        try {
+//            User user = userService.getById(User.class, id);
+//            userService.delete(user);
+//            resultModel.setSuccess(true);
+//            resultModel.setData("删除成功！");
+//            return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
+//        } catch (Exception e) {
+//            resultModel.setSuccess(false);
+//            resultModel.setData("删除失败！");
+//            try {
+//                return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
+//            } catch (JsonProcessingException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//
+//        return "";
+//    }
+//
+//    @RequestMapping(value = "/Test")
+//    @ResponseBody
+//    public String Test(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] files) {
+//        ResultModel<String> resultModel = new ResultModel<>();
+//        try {
+//            for (MultipartFile file : files) {
+//                System.out.println(file.getName());
+//            }
+//
+//            String UserName = request.getParameter("UserName");
+//            String Password = request.getParameter("Password");
+//            System.out.println(UserName + " --- " + Password);
+//
+//            resultModel.setSuccess(true);
+//            resultModel.setData("测试成功！");
+//            return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
+//        } catch (Exception e) {
+//            resultModel.setSuccess(false);
+//            resultModel.setData("测试失败！");
+//            try {
+//                return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
+//            } catch (JsonProcessingException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//
+//        return "";
+//    }
+
+    @Autowired
+    RoleService roleService;
+
+
+    @RequestMapping(value = "/")
+    public ModelAndView Index() {
+
+        return new ModelAndView("Manage/");
+    }
+
+    @RequestMapping(value = "/GetAll")
     @ResponseBody
-    public String delete(@RequestParam int id) {
+    public String GetAll() {
+        try {
+            List<Role> roleList = roleService.getRole();
+            return SystemUtil.getObjectMapper().writeValueAsString(roleList);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    //添加角色
+    @RequestMapping(value = "/Add")
+    @ResponseBody
+    public String Add(HttpServletRequest request,String name) {
         ResultModel<String> resultModel = new ResultModel<>();
         try {
-            User user = userService.getById(User.class, id);
-            userService.delete(user);
+
+            Role role = new Role();
+
+            name = request.getParameter("name");
+            String remark = request.getParameter("remark");
+
+            role.setName(name);
+            role.setRemark(remark);
+            roleService.add(role);
             resultModel.setSuccess(true);
-            resultModel.setData("删除成功！");
+            resultModel.setData("添加成功！");
             return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
         } catch (Exception e) {
             resultModel.setSuccess(false);
-            resultModel.setData("删除失败！");
+            resultModel.setData("添加失败！");
             try {
                 return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
             } catch (JsonProcessingException ex) {
@@ -739,25 +824,50 @@ public class UserController {
         return "";
     }
 
-    @RequestMapping(value = "/Test")
+    @RequestMapping(value = "/Edit")
     @ResponseBody
-    public String Test(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] files) {
+    public String Edit(@RequestParam String name,@RequestParam int id, HttpServletRequest request) {
         ResultModel<String> resultModel = new ResultModel<>();
         try {
-            for (MultipartFile file : files) {
-                System.out.println(file.getName());
-            }
 
-            String UserName = request.getParameter("UserName");
-            String Password = request.getParameter("Password");
-            System.out.println(UserName + " --- " + Password);
+            Role role = roleService.getById(Role.class, id);
 
+            name = request.getParameter("name");
+            String remark = request.getParameter("remark");
+
+            role.setName(name);
+            role.setRemark(remark);
+            roleService.edit(role);
             resultModel.setSuccess(true);
-            resultModel.setData("测试成功！");
+            resultModel.setData("修改成功！");
+
             return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
         } catch (Exception e) {
             resultModel.setSuccess(false);
-            resultModel.setData("测试失败！");
+            resultModel.setData("修改失败！");
+            try {
+                return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
+            } catch (JsonProcessingException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return "";
+    }
+
+    @RequestMapping(value = "/Delete")
+    @ResponseBody
+    public String delete(@RequestParam int id) {
+        ResultModel<String> resultModel = new ResultModel<>();
+        try {
+            Role role = roleService.getById(Role.class, id);
+            roleService.delete(role);
+            resultModel.setSuccess(true);
+            resultModel.setData("删除成功！");
+            return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
+        } catch (Exception e) {
+            resultModel.setSuccess(false);
+            resultModel.setData("删除失败！");
             try {
                 return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
             } catch (JsonProcessingException ex) {

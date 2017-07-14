@@ -37,11 +37,11 @@
 
             var username = $("#username").val();
             var password = $("#password").val();
-            if ($("#username").val() == "") {
+            if (username == "") {
                 alert("用户名不能为空!");
                 return;
             }
-            if ($("#password").val() == "") {
+            if (password == "") {
                 alert("密码不能为空!");
                 return;
             }
@@ -70,7 +70,7 @@
             });
         });
         $("#resetbtn").click(function () {
-            $('#ff').form('clear');
+            $('#ff').div('clear');
         });
     });
 
@@ -84,7 +84,7 @@
 <div class="login-background-box">
     <div class="login-content">
         <div class="login-content-description">
-            <form id="ff" method="post">
+            <div id="ff">
                 <div class="login-content-input form-group">
                     <h1 style="text-align: center">用户登录</h1>
                 </div>
@@ -117,7 +117,7 @@
                     <button id="loginbtn" class="btn login-content-button mt15">登录</button>
                     <button id="resetbtn" class="btn login-content-button mt15">重置</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
