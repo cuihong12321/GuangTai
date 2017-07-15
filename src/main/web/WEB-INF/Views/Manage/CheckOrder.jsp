@@ -57,12 +57,12 @@
                 key: "id",
                 loadMode: "raw",
                 load: function () {
-                    return $.getJSON("<%=contextPath%>/OperateOrder/GetAll");
+                    return $.getJSON("<%=contextPath%>/CheckOrder/GetAll");
                 },
                 // 插入数据
                 insert: function (values) {
                     return $.ajax({
-                        url: "<%=contextPath%>/OperateOrder/Add/",
+                        url: "<%=contextPath%>/CheckOrder/Add/",
                         method: "POST",
                         data: values
                     })
@@ -70,13 +70,13 @@
                 //删除数据
                 remove: function (key) {
                     return $.ajax({
-                        url: "<%=contextPath%>/OperateOrder/Delete/" + key,
+                        url: "<%=contextPath%>/CheckOrder/Delete/" + key,
                         method: "POST"
                     })
                 },
                 update: function (key, values) {
                     return $.ajax({
-                        url: "<%=contextPath%>/OperateOrder/Edit/" + key,
+                        url: "<%=contextPath%>/CheckOrder/Edit/" + key,
                         method: "POST",
                         data: values
                     })

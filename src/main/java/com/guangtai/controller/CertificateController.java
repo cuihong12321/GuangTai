@@ -1,10 +1,8 @@
 package com.guangtai.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.guangtai.model.domain.RoleMenu;
-import com.guangtai.model.domain.Menu;
-import com.guangtai.service.MenuService;
-import com.guangtai.service.RoleMenuService;
+import com.guangtai.model.domain.Certificate;
+import com.guangtai.service.CertificateService;
 import io.ruibu.model.ResultModel;
 import io.ruibu.util.SystemUtil;
 import org.apache.logging.log4j.LogManager;
@@ -15,103 +13,61 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Brooks on 2016/11/30.
- * UserController
+ * CertificateController
  */
 @Controller
-@RequestMapping(value = "/Menu")
-public class MenuController {
+@RequestMapping(value = "/Certificate")
+public class CertificateController {
 
     @Autowired
-    private MenuService menuService;
-
-    @Autowired
-    private RoleMenuService roleMenuService;
+    private CertificateService certificateService;
 
     @RequestMapping(value = "/")
     public ModelAndView Index() {
 
-        return new ModelAndView("Manage/Menu");
+        return new ModelAndView("Manage/Certificate");
     }
 
     @RequestMapping(value = "/GetAll")
     @ResponseBody
     public String GetAll() {
         try {
-            List<Menu> MenuList = menuService.getMenu();
-            return SystemUtil.getObjectMapper().writeValueAsString(MenuList);
+            List<Certificate> CertificateList = certificateService.getCertificate();
+            return SystemUtil.getObjectMapper().writeValueAsString(CertificateList);
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
-    @RequestMapping("/Gettest")
-    @ResponseBody
-    public void getMenutest(HttpServletRequest request, HttpServletResponse response) {
-        Integer roleid = Integer.parseInt(request.getParameter("roleid"));
-
-        try {
-            List<Menu> menulist = new ArrayList<>();
-            List<RoleMenu> roleMenulist = roleMenuService.getRoleMenu(roleid);
-            Menu menu;
-            for (RoleMenu roleMenu : roleMenulist) {
-                menu = menuService.getById(Menu.class,roleMenu.getMenuid());
-                menulist.add(menu);
-                System.out.print(roleMenu);
-            }
-            System.out.print(menulist);
-            response.getWriter().write(SystemUtil.getObjectMapper().writeValueAsString(menulist));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     //添加
     @RequestMapping(value = "/Add")
     @ResponseBody
     public String Add(HttpServletRequest request,
-                      @RequestParam(required = false) String icon,
                       @RequestParam(required = false) String name,
-                      @RequestParam(required = false) String url,
-                      @RequestParam(required = false) String parentid,
                       @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
 
         try {
-            Menu menu = new Menu();
-
-            if (icon != null) {
-                menu.setIcon(icon);
-            }
+            Certificate certificate = new Certificate();
 
             if (name != null) {
-                menu.setName(name);
-            }
-
-            if (url != null) {
-                menu.setUrl(url);
-            }
-
-            if (parentid != null) {
-                menu.setParentid(Integer.valueOf(parentid));
+                certificate.setName(name);
             }
 
             if (remark != null) {
-                menu.setRemark(remark);
+                certificate.setRemark(remark);
             }
 
-            menu.setUpdatetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            certificate.setUpdatetime(LocalDateTime.now().toString());
             //执行修改添加方法
-            menuService.add(menu);
+            certificateService.add(certificate);
 
             resultModel.setSuccess(true);
             resultModel.setData("添加成功！");
@@ -136,39 +92,24 @@ public class MenuController {
     @RequestMapping(value = "/Edit/{id}")
     @ResponseBody
     public String Edit(HttpServletRequest request, @PathVariable String id,
-                       @RequestParam(required = false) String icon,
                        @RequestParam(required = false) String name,
-                       @RequestParam(required = false) String url,
-                       @RequestParam(required = false) String parentid,
                        @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
 
         try {
-            Menu menu = menuService.getById(Menu.class, Integer.valueOf(id));
-
-            if (icon != null) {
-                menu.setIcon(icon);
-            }
+            Certificate certificate = certificateService.getById(Certificate.class, Integer.valueOf(id));
 
             if (name != null) {
-                menu.setName(name);
-            }
-
-            if (url != null) {
-                menu.setUrl(url);
-            }
-
-            if (parentid != null) {
-                menu.setParentid(Integer.valueOf(parentid));
+                certificate.setName(name);
             }
 
             if (remark != null) {
-                menu.setRemark(remark);
+                certificate.setRemark(remark);
             }
 
-            menu.setUpdatetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            certificate.setUpdatetime(LocalDateTime.now().toString());
             //执行修改方法
-            menuService.edit(menu);
+            certificateService.edit(certificate);
 
             resultModel.setSuccess(true);
             resultModel.setData("修改成功！");
@@ -196,10 +137,10 @@ public class MenuController {
         ResultModel<String> resultModel = new ResultModel<>();
 
         try {
-            Menu menu = menuService.getById(Menu.class, Integer.valueOf(id));
+            Certificate certificate = certificateService.getById(Certificate.class, Integer.valueOf(id));
 
             //执行删除方法
-            menuService.delete(menu);
+            certificateService.delete(certificate);
 
             resultModel.setSuccess(true);
             resultModel.setData("删除成功！");

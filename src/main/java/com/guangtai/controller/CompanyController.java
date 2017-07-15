@@ -1,10 +1,8 @@
 package com.guangtai.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.guangtai.model.domain.RoleMenu;
-import com.guangtai.model.domain.Menu;
-import com.guangtai.service.MenuService;
-import com.guangtai.service.RoleMenuService;
+import com.guangtai.model.domain.Company;
+import com.guangtai.service.CompanyService;
 import io.ruibu.model.ResultModel;
 import io.ruibu.util.SystemUtil;
 import org.apache.logging.log4j.LogManager;
@@ -15,12 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,90 +22,57 @@ import java.util.List;
  * UserController
  */
 @Controller
-@RequestMapping(value = "/Menu")
-public class MenuController {
+@RequestMapping(value = "/Company")
+public class CompanyController {
 
     @Autowired
-    private MenuService menuService;
-
-    @Autowired
-    private RoleMenuService roleMenuService;
+    private CompanyService companyService;
 
     @RequestMapping(value = "/")
     public ModelAndView Index() {
 
-        return new ModelAndView("Manage/Menu");
+        return new ModelAndView("Manage/Company");
     }
 
     @RequestMapping(value = "/GetAll")
     @ResponseBody
     public String GetAll() {
         try {
-            List<Menu> MenuList = menuService.getMenu();
-            return SystemUtil.getObjectMapper().writeValueAsString(MenuList);
+            List<Company> companyList = companyService.getCompany();
+            return SystemUtil.getObjectMapper().writeValueAsString(companyList);
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
-    @RequestMapping("/Gettest")
-    @ResponseBody
-    public void getMenutest(HttpServletRequest request, HttpServletResponse response) {
-        Integer roleid = Integer.parseInt(request.getParameter("roleid"));
-
-        try {
-            List<Menu> menulist = new ArrayList<>();
-            List<RoleMenu> roleMenulist = roleMenuService.getRoleMenu(roleid);
-            Menu menu;
-            for (RoleMenu roleMenu : roleMenulist) {
-                menu = menuService.getById(Menu.class,roleMenu.getMenuid());
-                menulist.add(menu);
-                System.out.print(roleMenu);
-            }
-            System.out.print(menulist);
-            response.getWriter().write(SystemUtil.getObjectMapper().writeValueAsString(menulist));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     //添加
     @RequestMapping(value = "/Add")
     @ResponseBody
     public String Add(HttpServletRequest request,
-                      @RequestParam(required = false) String icon,
                       @RequestParam(required = false) String name,
-                      @RequestParam(required = false) String url,
-                      @RequestParam(required = false) String parentid,
+                      @RequestParam(required = false) String address,
                       @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
 
         try {
-            Menu menu = new Menu();
-
-            if (icon != null) {
-                menu.setIcon(icon);
-            }
+            Company company = new Company();
 
             if (name != null) {
-                menu.setName(name);
+                company.setName(name);
             }
 
-            if (url != null) {
-                menu.setUrl(url);
-            }
-
-            if (parentid != null) {
-                menu.setParentid(Integer.valueOf(parentid));
+            if (address != null) {
+                company.setAddress(address);
             }
 
             if (remark != null) {
-                menu.setRemark(remark);
+                company.setRemark(remark);
             }
 
-            menu.setUpdatetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            company.setUpdatetime(LocalDateTime.now().toString());
             //执行修改添加方法
-            menuService.add(menu);
+            companyService.add(company);
 
             resultModel.setSuccess(true);
             resultModel.setData("添加成功！");
@@ -136,39 +97,29 @@ public class MenuController {
     @RequestMapping(value = "/Edit/{id}")
     @ResponseBody
     public String Edit(HttpServletRequest request, @PathVariable String id,
-                       @RequestParam(required = false) String icon,
                        @RequestParam(required = false) String name,
-                       @RequestParam(required = false) String url,
-                       @RequestParam(required = false) String parentid,
+                       @RequestParam(required = false) String address,
                        @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
 
         try {
-            Menu menu = menuService.getById(Menu.class, Integer.valueOf(id));
-
-            if (icon != null) {
-                menu.setIcon(icon);
-            }
+            Company company = companyService.getById(Company.class, Integer.valueOf(id));
 
             if (name != null) {
-                menu.setName(name);
+                company.setName(name);
             }
 
-            if (url != null) {
-                menu.setUrl(url);
-            }
-
-            if (parentid != null) {
-                menu.setParentid(Integer.valueOf(parentid));
+            if (address != null) {
+                company.setAddress(address);
             }
 
             if (remark != null) {
-                menu.setRemark(remark);
+                company.setRemark(remark);
             }
 
-            menu.setUpdatetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            company.setUpdatetime(LocalDateTime.now().toString());
             //执行修改方法
-            menuService.edit(menu);
+            companyService.edit(company);
 
             resultModel.setSuccess(true);
             resultModel.setData("修改成功！");
@@ -196,10 +147,10 @@ public class MenuController {
         ResultModel<String> resultModel = new ResultModel<>();
 
         try {
-            Menu menu = menuService.getById(Menu.class, Integer.valueOf(id));
+            Company company = companyService.getById(Company.class, Integer.valueOf(id));
 
             //执行删除方法
-            menuService.delete(menu);
+            companyService.delete(company);
 
             resultModel.setSuccess(true);
             resultModel.setData("删除成功！");

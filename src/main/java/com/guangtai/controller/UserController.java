@@ -1,6 +1,7 @@
 package com.guangtai.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.guangtai.model.domain.Interviewee;
 import com.guangtai.model.domain.Role;
 import com.guangtai.model.domain.User;
 import com.guangtai.service.*;
@@ -10,6 +11,7 @@ import io.ruibu.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -773,105 +776,165 @@ public class UserController {
 //    }
 
     @Autowired
-    RoleService roleService;
+    UserService userService;
 
 
     @RequestMapping(value = "/")
     public ModelAndView Index() {
 
-        return new ModelAndView("Manage/");
+        return new ModelAndView("Manage/User");
     }
 
     @RequestMapping(value = "/GetAll")
     @ResponseBody
     public String GetAll() {
         try {
-            List<Role> roleList = roleService.getRole();
-            return SystemUtil.getObjectMapper().writeValueAsString(roleList);
+            List<User> userList = userService.getUser();
+            return SystemUtil.getObjectMapper().writeValueAsString(userList);
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
-    //添加角色
+    //添加
     @RequestMapping(value = "/Add")
     @ResponseBody
-    public String Add(HttpServletRequest request,String name) {
+    public String Add(HttpServletRequest request,
+                      @RequestParam(required = false) String roleid,
+                      @RequestParam(required = false) String username,
+                      @RequestParam(required = false) String password,
+                      @RequestParam(required = false) String telephone,
+                      @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
+
         try {
+            User user = new User();
 
-            Role role = new Role();
+            if (roleid != null) {
+                user.setRoleid(Integer.valueOf(roleid));
+            }
 
-            name = request.getParameter("name");
-            String remark = request.getParameter("remark");
+            if (username != null) {
+                user.setUsername(username);
+            }
 
-            role.setName(name);
-            role.setRemark(remark);
-            roleService.add(role);
+            if (password != null) {
+                user.setUsername(SecurityUtil.encrypt(password, SecurityUtil.AlgorithmType.SHA512));
+            }
+
+            if (telephone != null) {
+                user.setTelephone(telephone);
+            }
+
+            if (remark != null) {
+                user.setRemark(remark);
+            }
+
+            user.setUpdatetime(LocalDateTime.now().toString());
+            //执行修改添加方法
+            userService.add(user);
+
             resultModel.setSuccess(true);
             resultModel.setData("添加成功！");
             return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
         } catch (Exception e) {
+            LogManager.getLogger().error(e.toString());
+
             resultModel.setSuccess(false);
             resultModel.setData("添加失败！");
             try {
                 return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
             } catch (JsonProcessingException ex) {
-                ex.printStackTrace();
+                LogManager.getLogger().error(ex.toString());
+
             }
         }
 
         return "";
     }
 
-    @RequestMapping(value = "/Edit")
+    //修改
+    @RequestMapping(value = "/Edit/{id}")
     @ResponseBody
-    public String Edit(@RequestParam String name,@RequestParam int id, HttpServletRequest request) {
+    public String Edit(HttpServletRequest request, @PathVariable String id,
+                       @RequestParam(required = false) String roleid,
+                       @RequestParam(required = false) String username,
+                       @RequestParam(required = false) String password,
+                       @RequestParam(required = false) String telephone,
+                       @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
+
         try {
+            User user = userService.getById(User.class, Integer.valueOf(id));
 
-            Role role = roleService.getById(Role.class, id);
+            if (roleid != null) {
+                user.setRoleid(Integer.valueOf(roleid));
+            }
 
-            name = request.getParameter("name");
-            String remark = request.getParameter("remark");
+            if (username != null) {
+                user.setUsername(username);
+            }
 
-            role.setName(name);
-            role.setRemark(remark);
-            roleService.edit(role);
+            if (password != null) {
+                user.setUsername(SecurityUtil.encrypt(password, SecurityUtil.AlgorithmType.SHA512));
+            }
+
+            if (telephone != null) {
+                user.setTelephone(telephone);
+            }
+
+            if (remark != null) {
+                user.setRemark(remark);
+            }
+
+            user.setUpdatetime(LocalDateTime.now().toString());
+            //执行修改方法
+            userService.edit(user);
+
             resultModel.setSuccess(true);
             resultModel.setData("修改成功！");
-
             return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
         } catch (Exception e) {
+            LogManager.getLogger().error(e.toString());
+
             resultModel.setSuccess(false);
             resultModel.setData("修改失败！");
             try {
                 return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
             } catch (JsonProcessingException ex) {
-                ex.printStackTrace();
+                LogManager.getLogger().error(ex.toString());
+
             }
         }
 
         return "";
     }
 
-    @RequestMapping(value = "/Delete")
+    //删除
+    @RequestMapping(value = "/Delete/{id}")
     @ResponseBody
-    public String delete(@RequestParam int id) {
+    public String Delete(HttpServletRequest request, @PathVariable String id) {
         ResultModel<String> resultModel = new ResultModel<>();
+
         try {
-            Role role = roleService.getById(Role.class, id);
-            roleService.delete(role);
+            User user = userService.getById(User.class, Integer.valueOf(id));
+
+            //执行删除方法
+            userService.delete(user);
+
             resultModel.setSuccess(true);
             resultModel.setData("删除成功！");
             return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
         } catch (Exception e) {
+            LogManager.getLogger().error(e.toString());
+
             resultModel.setSuccess(false);
             resultModel.setData("删除失败！");
             try {
                 return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
             } catch (JsonProcessingException ex) {
-                ex.printStackTrace();
+                LogManager.getLogger().error(ex.toString());
+
             }
         }
 

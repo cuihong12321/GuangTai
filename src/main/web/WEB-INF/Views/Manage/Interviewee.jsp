@@ -34,19 +34,19 @@
         $(function () {
 
             var store = new DevExpress.data.ODataStore({
-                url: "<%=contextPath%>/Role/GetAll"
+                url: "<%=contextPath%>/DepartMent/GetAll"
             });
 
             var gridDataSource = new DevExpress.data.DataSource({
                 key: "id",
                 loadMode: "raw",
                 load: function () {
-                    return $.getJSON("<%=contextPath%>/User/GetAll");
+                    return $.getJSON("<%=contextPath%>/Interviewee/GetAll");
                 },
                 // 插入数据
                 insert: function (values) {
                     return $.ajax({
-                        url: "<%=contextPath%>/User/Add/",
+                        url: "<%=contextPath%>/Interviewee/Add/",
                         method: "POST",
                         data: values
                     })
@@ -54,13 +54,13 @@
                 //删除数据
                 remove: function (key) {
                     return $.ajax({
-                        url: "<%=contextPath%>/User/Delete/" + key,
+                        url: "<%=contextPath%>/Interviewee/Delete/" + key,
                         method: "POST"
                     })
                 },
                 update: function (key, values) {
                     return $.ajax({
-                        url: "<%=contextPath%>/User/Edit/" + key,
+                        url: "<%=contextPath%>/Interviewee/Edit/" + key,
                         method: "POST",
                         data: values
                     })
@@ -78,7 +78,7 @@
                         allowDeleting: true,
                         allowAdding: true,
                         popup: {
-                            title: "用户",
+                            title: "被访人",
                             showTitle: true,
                             width: 700,
                             height: 345,
@@ -99,8 +99,8 @@
                     },
                     columns: [
                         {
-                            dataField: "roleid",
-                            caption: "角色",
+                            dataField: "departmentid",
+                            caption: "部门",
                             lookup: {
                                 valueExpr: "id",
                                 displayExpr: "name",
@@ -111,13 +111,8 @@
                             width: 300
                         },
                         {
-                            dataField: "username",
+                            dataField: "name",
                             caption: "姓名",
-                            width: 300
-                        },
-                        {
-                            dataField: "password",
-                            caption: "密码",
                             width: 300
                         },
                         {

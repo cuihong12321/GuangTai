@@ -5,14 +5,17 @@ import com.guangtai.model.domain.Role;
 import com.guangtai.service.RoleService;
 import io.ruibu.model.ResultModel;
 import io.ruibu.util.SystemUtil;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -45,85 +48,115 @@ public class RoleController {
         }
     }
 
-    //添加角色
+    //添加
     @RequestMapping(value = "/Add")
     @ResponseBody
-    public String Add(HttpServletRequest request,String name) {
+    public String Add(HttpServletRequest request,
+                      @RequestParam(required = false) String name,
+                      @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
-        try {
 
+        try {
             Role role = new Role();
 
-            name = request.getParameter("name");
-            String remark = request.getParameter("remark");
+            if (name != null) {
+                role.setName(name);
+            }
 
-            role.setName(name);
-            role.setRemark(remark);
+            if (remark != null) {
+                role.setRemark(remark);
+            }
+
+            role.setUpdatetime(LocalDateTime.now().toString());
+            //执行修改添加方法
             roleService.add(role);
+
             resultModel.setSuccess(true);
             resultModel.setData("添加成功！");
             return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
         } catch (Exception e) {
+            LogManager.getLogger().error(e.toString());
+
             resultModel.setSuccess(false);
             resultModel.setData("添加失败！");
             try {
                 return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
             } catch (JsonProcessingException ex) {
-                ex.printStackTrace();
+                LogManager.getLogger().error(ex.toString());
+
             }
         }
 
         return "";
     }
 
-    @RequestMapping(value = "/Edit")
+    //修改
+    @RequestMapping(value = "/Edit/{id}")
     @ResponseBody
-    public String Edit(@RequestParam String name,@RequestParam int id, HttpServletRequest request) {
+    public String Edit(HttpServletRequest request, @PathVariable String id,
+                       @RequestParam(required = false) String name,
+                       @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
+
         try {
+            Role role = roleService.getById(Role.class, Integer.valueOf(id));
 
-            Role role = roleService.getById(Role.class, id);
+            if (name != null) {
+                role.setName(name);
+            }
 
-            name = request.getParameter("name");
-            String remark = request.getParameter("remark");
+            if (remark != null) {
+                role.setRemark(remark);
+            }
 
-            role.setName(name);
-            role.setRemark(remark);
+            role.setUpdatetime(LocalDateTime.now().toString());
+            //执行修改方法
             roleService.edit(role);
+
             resultModel.setSuccess(true);
             resultModel.setData("修改成功！");
-
             return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
         } catch (Exception e) {
+            LogManager.getLogger().error(e.toString());
+
             resultModel.setSuccess(false);
             resultModel.setData("修改失败！");
             try {
                 return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
             } catch (JsonProcessingException ex) {
-                ex.printStackTrace();
+                LogManager.getLogger().error(ex.toString());
+
             }
         }
 
         return "";
     }
 
-    @RequestMapping(value = "/Delete")
+    //删除
+    @RequestMapping(value = "/Delete/{id}")
     @ResponseBody
-    public String delete(@RequestParam int id) {
+    public String Delete(HttpServletRequest request, @PathVariable String id) {
         ResultModel<String> resultModel = new ResultModel<>();
+
         try {
-            Role role = roleService.getById(Role.class, id);
+            Role role = roleService.getById(Role.class, Integer.valueOf(id));
+
+            //执行删除方法
             roleService.delete(role);
+
             resultModel.setSuccess(true);
             resultModel.setData("删除成功！");
             return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
         } catch (Exception e) {
+            LogManager.getLogger().error(e.toString());
+
             resultModel.setSuccess(false);
             resultModel.setData("删除失败！");
             try {
                 return SystemUtil.getObjectMapper().writeValueAsString(resultModel);
             } catch (JsonProcessingException ex) {
-                ex.printStackTrace();
+                LogManager.getLogger().error(ex.toString());
+
             }
         }
 

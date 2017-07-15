@@ -11,125 +11,79 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
+    @RequestMapping(value = "/")
+    public ModelAndView Manage() {
+        return new ModelAndView("Manage/Login");
+    }
+
+
+
     @RequestMapping(value = "/BackGround/Forground")
-    public ModelAndView ForgroundPage() {
+    public ModelAndView Forground() {
         return new ModelAndView("Forground");
     }
 
-    @RequestMapping(value = "/ForGround/OrderPage")
-    public ModelAndView OrderPage() {
-        return new ModelAndView("OrderPage");
+    @RequestMapping(value = "/ForGround/InsertOrder")
+    public ModelAndView InsertOrder() {
+        return new ModelAndView("Manage/InsertOrder");
     }
 
-    @RequestMapping(value = "/ForGround/OperateOrderPage")
-    public ModelAndView OperateOrderPage() {
-        return new ModelAndView("OperateOrderPage");
-    }
-
-    @RequestMapping(value = "/ForGround/DispatchPage")
-    public ModelAndView DispatchPage() {
-        return new ModelAndView("DispatchPage");
-    }
-
-    @RequestMapping(value = "/ForGround/AuditingPage")
-    public ModelAndView AuditingPage() {
-        return new ModelAndView("AuditingPage");
-    }
-
-    @RequestMapping(value = "/BackGround/BulkCargo")
-    public ModelAndView BulkCargoPage() {
-        return new ModelAndView("BulkCargo");
-    }
-
-    @RequestMapping(value = "/BulkCargo/Order")
-    public ModelAndView Order() {
-        return new ModelAndView("Order");
-    }
-
-    @RequestMapping(value = "/BulkCargo/OperateOrder")
+    @RequestMapping(value = "/ForGround/OperateOrder")
     public ModelAndView OperateOrder() {
-        return new ModelAndView("OperateOrder");
+        return new ModelAndView("Manage/OperateOrder");
     }
 
-    @RequestMapping(value = "/BulkCargo/Dispatch")
-    public ModelAndView Dispatch() {
-        return new ModelAndView("Dispatch");
+    @RequestMapping(value = "/ForGround/CheckOrder")
+    public ModelAndView CheckOrder() {
+        return new ModelAndView("Manage/CheckOrder");
     }
 
-    @RequestMapping(value = "/BulkCargo/Auditing")
-    public ModelAndView Auditing() {
-        return new ModelAndView("Auditing");
+
+
+
+    @RequestMapping(value = "/BackGround/BackGround")
+    public ModelAndView BackGround() {
+        return new ModelAndView("BackGround");
     }
 
-    @RequestMapping(value = "/BackGround/Factory")
-    public ModelAndView FactoryPage() {
-        return new ModelAndView("FactoryPage");
+    @RequestMapping(value = "/BackGround/Visitor")
+    public ModelAndView Visitor() {
+        return new ModelAndView("Manage/Visitor");
     }
 
-    @RequestMapping(value = "/BackGround/Supplier")
-    public ModelAndView SupplierPage() {
-        return new ModelAndView("SupplierPage");
+    @RequestMapping(value = "/BackGround/Company")
+    public ModelAndView Company() {
+        return new ModelAndView("Manage/Company");
     }
 
-    @RequestMapping(value = "/BackGround/Area")
-    public ModelAndView AreaPage() {
-        return new ModelAndView("AreaPage");
+    @RequestMapping(value = "/BackGround/Certificate")
+    public ModelAndView Certificate() {
+        return new ModelAndView("Manage/Certificate");
     }
 
-    @RequestMapping(value = "/BackGround/Cost")
-    public ModelAndView CostPage() {
-        return new ModelAndView("CostPage");
+
+
+    @RequestMapping(value = "/BackGround/BasicManage")
+    public ModelAndView BasicManage() {
+        return new ModelAndView("BasicManage");
     }
 
-    @RequestMapping(value = "/BackGround/Balanceunit")
-    public ModelAndView BalanceunitPage() {
-        return new ModelAndView("BalanceunitPage");
+    @RequestMapping(value = "/BasicManage/Interviewee")
+    public ModelAndView Interviewee() {
+        return new ModelAndView("Manage/Interviewee");
     }
 
-    @RequestMapping(value = "/BackGround/CostType")
-    public ModelAndView CostTypePage() {
-        return new ModelAndView("CostTypePage");
+    @RequestMapping(value = "/BasicManage/DepartMent")
+    public ModelAndView Department() {
+        return new ModelAndView("Manage/DepartMent");
     }
 
-    @RequestMapping(value = "/BackGround/Currency")
-    public ModelAndView CurrencyPage() {
-        return new ModelAndView("CurrencyPage");
-    }
 
-    @RequestMapping(value = "/BackGround/Customer")
-    public ModelAndView CustomerPage() {
-        return new ModelAndView("CustomerPage");
-    }
 
-    @RequestMapping(value = "/BackGround/ContainerType")
-    public ModelAndView ContainerTypePage() {
-        return new ModelAndView("ContainerTypePage");
-    }
-
-    @RequestMapping(value = "/BackGround/Driver")
-    public ModelAndView DriverPage() {
-        return new ModelAndView("Driver");
-    }
 
     @RequestMapping(value = "/BackGround/AccountManage")
     public ModelAndView AccountManagePage() {
         return new ModelAndView("AccountManage");
-    }
-
-    @RequestMapping(value = "/BackGround/Commdity")
-    public ModelAndView CommdityPage() {
-        return new ModelAndView("CommdityPage");
-    }
-
-    @RequestMapping(value = "/ForGround/Report")
-    public ModelAndView Payreportpage() {
-        return new ModelAndView("CostReport");
-    }
-
-
-    @RequestMapping(value = "/")
-    public ModelAndView Manage() {
-        return new ModelAndView("Manage/Login");
     }
 
     @RequestMapping(value = "AccountManage/User")

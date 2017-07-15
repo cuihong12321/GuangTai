@@ -33,36 +33,24 @@
     <script>
         $(function () {
 
-            var Company = new DevExpress.data.ODataStore({
-                url: "<%=contextPath%>/Company/GetAll"
-            });
-
-            var Visitor = new DevExpress.data.ODataStore({
-                url: "<%=contextPath%>//GetAll"
-            });
-
-            var Certificate = new DevExpress.data.ODataStore({
+            var store = new DevExpress.data.ODataStore({
                 url: "<%=contextPath%>/Certificate/GetAll"
             });
 
-            var DepartMent = new DevExpress.data.ODataStore({
-                url: "<%=contextPath%>/DepartMent/GetAll"
-            });
-
-            var Interviewee = new DevExpress.data.ODataStore({
-                url: "<%=contextPath%>/Interviewee/GetAll"
+            var store2 = new DevExpress.data.ODataStore({
+                url: "<%=contextPath%>/Company/GetAll"
             });
 
             var gridDataSource = new DevExpress.data.DataSource({
                 key: "id",
                 loadMode: "raw",
                 load: function () {
-                    return $.getJSON("<%=contextPath%>/OperateOrder/GetAll");
+                    return $.getJSON("<%=contextPath%>/Visitor/GetAll");
                 },
                 // 插入数据
                 insert: function (values) {
                     return $.ajax({
-                        url: "<%=contextPath%>/OperateOrder/Add/",
+                        url: "<%=contextPath%>/Visitor/Add/",
                         method: "POST",
                         data: values
                     })
@@ -70,13 +58,13 @@
                 //删除数据
                 remove: function (key) {
                     return $.ajax({
-                        url: "<%=contextPath%>/OperateOrder/Delete/" + key,
+                        url: "<%=contextPath%>/Visitor/Delete/" + key,
                         method: "POST"
                     })
                 },
                 update: function (key, values) {
                     return $.ajax({
-                        url: "<%=contextPath%>/OperateOrder/Edit/" + key,
+                        url: "<%=contextPath%>/Visitor/Edit/" + key,
                         method: "POST",
                         data: values
                     })
@@ -94,10 +82,10 @@
                         allowDeleting: true,
                         allowAdding: true,
                         popup: {
-                            title: "访客单",
+                            title: "访客",
                             showTitle: true,
                             width: 700,
-                            height: 700,
+                            height: 345,
                             position: {
                                 my: "top",
                                 at: "top",
@@ -115,78 +103,32 @@
                     },
                     columns: [
                         {
-                            dataField: "companyid",
-                            caption: "来宾公司",
-                            lookup: {
-                                valueExpr: "id",
-                                displayExpr: "name",
-                                dataSource: {
-                                    store: Company
-                                }
-                            },
-                            width: 300
-                        },
-                        {
-                            dataField: "visitorid",
-                            caption: "来宾姓名",
-                            lookup: {
-                                valueExpr: "id",
-                                displayExpr: "name",
-                                dataSource: {
-                                    store: Visitor
-                                }
-                            },
-                            width: 300
-                        },
-                        {
                             dataField: "certificateid",
                             caption: "证件名称",
                             lookup: {
                                 valueExpr: "id",
                                 displayExpr: "name",
                                 dataSource: {
-                                    store: Certificate
+                                    store: store
                                 }
                             },
                             width: 300
                         },
                         {
-                            dataField: "departmentid",
-                            caption: "被访部门",
+                            dataField: "companyid",
+                            caption: "来宾公司",
                             lookup: {
                                 valueExpr: "id",
                                 displayExpr: "name",
                                 dataSource: {
-                                    store: DepartMent
+                                    store: store2
                                 }
                             },
                             width: 300
                         },
                         {
-                            dataField: "intervieweweeid",
-                            caption: "被访人",
-                            lookup: {
-                                valueExpr: "id",
-                                displayExpr: "name",
-                                dataSource: {
-                                    store: Interviewee
-                                }
-                            },
-                            width: 300
-                        },
-                        {
-                            dataField: "reason",
-                            caption: "来访事由",
-                            width: 300
-                        },
-                        {
-                            dataField: "retinue",
-                            caption: "随行人员",
-                            width: 300
-                        },
-                        {
-                            dataField: "belongings",
-                            caption: "携带物品",
+                            dataField: "name",
+                            caption: "姓名",
                             width: 300
                         },
                         {
@@ -205,25 +147,13 @@
                             width: 300
                         },
                         {
-                            dataField: "replacement",
-                            caption: "换证物品",
-                            width: 300
-                        },
-                        {
                             dataField: "visitornumber",
                             caption: "访客证号",
                             width: 300
                         },
                         {
-                            dataField: "ordertime",
-                            caption: "预约时间",
-                            dataType: "date",
-                            width: 300
-                        },
-                        {
-                            dataField: "interviewtime",
-                            caption: "来访时间",
-                            dataType: "date",
+                            dataField: "telephone",
+                            caption: "电话",
                             width: 300
                         },
                         {
@@ -236,11 +166,6 @@
                             dataField: "leavetime",
                             caption: "出厂时间",
                             dataType: "date",
-                            width: 300
-                        },
-                        {
-                            dataField: "state",
-                            caption: "状态",
                             width: 300
                         },
                         {

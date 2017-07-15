@@ -33,20 +33,16 @@
     <script>
         $(function () {
 
-            var store = new DevExpress.data.ODataStore({
-                url: "<%=contextPath%>/Role/GetAll"
-            });
-
             var gridDataSource = new DevExpress.data.DataSource({
                 key: "id",
                 loadMode: "raw",
                 load: function () {
-                    return $.getJSON("<%=contextPath%>/User/GetAll");
+                    return $.getJSON("<%=contextPath%>/DepartMent/GetAll");
                 },
                 // 插入数据
                 insert: function (values) {
                     return $.ajax({
-                        url: "<%=contextPath%>/User/Add/",
+                        url: "<%=contextPath%>/DepartMent/Add/",
                         method: "POST",
                         data: values
                     })
@@ -54,13 +50,13 @@
                 //删除数据
                 remove: function (key) {
                     return $.ajax({
-                        url: "<%=contextPath%>/User/Delete/" + key,
+                        url: "<%=contextPath%>/DepartMent/Delete/" + key,
                         method: "POST"
                     })
                 },
                 update: function (key, values) {
                     return $.ajax({
-                        url: "<%=contextPath%>/User/Edit/" + key,
+                        url: "<%=contextPath%>/DepartMent/Edit/" + key,
                         method: "POST",
                         data: values
                     })
@@ -78,7 +74,7 @@
                         allowDeleting: true,
                         allowAdding: true,
                         popup: {
-                            title: "用户",
+                            title: "部门",
                             showTitle: true,
                             width: 700,
                             height: 345,
@@ -99,30 +95,8 @@
                     },
                     columns: [
                         {
-                            dataField: "roleid",
-                            caption: "角色",
-                            lookup: {
-                                valueExpr: "id",
-                                displayExpr: "name",
-                                dataSource: {
-                                    store: store
-                                }
-                            },
-                            width: 300
-                        },
-                        {
-                            dataField: "username",
-                            caption: "姓名",
-                            width: 300
-                        },
-                        {
-                            dataField: "password",
-                            caption: "密码",
-                            width: 300
-                        },
-                        {
-                            dataField: "telephone",
-                            caption: "电话",
+                            dataField: "name",
+                            caption: "部门名称",
                             width: 300
                         },
                         {

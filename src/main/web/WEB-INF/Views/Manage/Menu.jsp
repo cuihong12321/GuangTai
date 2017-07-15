@@ -31,6 +31,10 @@
         }
     </style>
     <script>
+        var store = new DevExpress.data.ODataStore({
+            url: "<%=contextPath%>/Menu/GetAll"
+        });
+
         var gridDataSource = new DevExpress.data.DataSource({
             key: "id",
             loadMode: "raw",
@@ -100,28 +104,36 @@
                 columns: [
                     {
                         dataField: "image",
-                        width: 170
+                        width: 300
                     },
                     {
                         dataField: "name",
-                        width: 170
+                        width: 300
                     },
                     {
                         dataField: "url",
-                        width: 170
+                        width: 300
                     },
                     {
                         dataField: "parentid",
-                        width: 170
+                        caption: "父级菜单",
+                        lookup: {
+                            valueExpr: "id",
+                            displayExpr: "name",
+                            dataSource: {
+                                store: store
+                            }
+                        },
+                        width: 300
                     },
                     {
                         dataField: "updatetime",
                         dataType: "date",
-                        width: 170
+                        width: 300
                     },
                     {
                         dataField: "remark",
-                        width: 170
+                        width: 300
                     }
                 ],
                 onCellPrepared: function(e) {

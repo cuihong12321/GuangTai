@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "department", schema = "guangtai", catalog = "")
-public class Department {
+public class DepartMent {
     private int id;
     private String name;
     private String updatetime;
@@ -55,7 +55,7 @@ public class Department {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Department that = (Department) o;
+        DepartMent that = (DepartMent) o;
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;

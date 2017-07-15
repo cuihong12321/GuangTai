@@ -271,16 +271,6 @@
                             width: 300
                         },
                         {
-                            dataField: "parentid",
-                            caption: "父级角色",
-                            width: 300
-                        },
-                        {
-                            dataField: "isrebate",
-                            caption: "是否参与返利",
-                            width: 300
-                        },
-                        {
                             dataField: "updatetime",
                             caption: "更新时间",
                             dataType: "date",

@@ -45,57 +45,65 @@
                 success: function (data) {
                     menulist = eval(data);
                     for (var i = 0; i < menulist.length; i++) {
+
+
                         if (menulist[i].url.indexOf("ForGround") == 1) {
                             $('<img/>', {
                                 src: "<%=contextPath%>/resources/images/" + menulist[i].icon,
                                 title: menulist[i].name,
                                 onclick: "javascript:{addTab(" +
                                 "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
-                            }).appendTo($("#menus"));
-                            $('<br/><br/>').appendTo($("#menus"));
+                            }).appendTo($("#a"));
+                            $('<br/><br/>').appendTo($("#a"));
                             $('<a />', {
                                 id: "a" + i,
                                 text: menulist[i].name,
                                 href: "javascript:{addTab(" +
                                 "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}",
-                            }).appendTo($("#menus"));
-                            $('<br/><br/>').appendTo($("#menus"));
+                            }).appendTo($("#a"));
+                            $('<br/><br/>').appendTo($("#a"));
                         }
-                        if (menulist[i].url.indexOf("BulkCargo") == 1) {
+
+
+                        if (menulist[i].url.indexOf("BackGround") == 1) {
                             $('<img/>', {
                                 src: "<%=contextPath%>/resources/images/" + menulist[i].icon,
                                 title: menulist[i].name,
                                 onclick: "javascript:{addTab(" +
                                 "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
-                            }).appendTo($("#bulkcargomanage"));
-                            $('<br/><br/>').appendTo($("#bulkcargomanage"));
+                            }).appendTo($("#b"));
+                            $('<br/><br/>').appendTo($("#b"));
                             $('<a />', {
                                 id: "a" + i,
                                 text: menulist[i].name,
                                 href: "javascript:{addTab(" +
                                 "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
 
-                            }).appendTo($("#bulkcargomanage"));
+                            }).appendTo($("#b"));
 
-                            $('<br/><br/>').appendTo($("#bulkcargomanage"));
+                            $('<br/><br/>').appendTo($("#b"));
                         }
 
-                        if (menulist[i].url.indexOf("Manage") == 1) {
+
+
+                        if (menulist[i].url.indexOf("BasicManage") == 1) {
                             $('<img/>', {
                                 src: "<%=contextPath%>/resources/images/" + menulist[i].icon,
                                 title: menulist[i].name,
                                 onclick: "javascript:{addTab(" +
                                 "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
-                            }).appendTo($("#backgroundmanage"));
-                            $('<br/><br/>').appendTo($("#backgroundmanage"));
+                            }).appendTo($("#c"));
+                            $('<br/><br/>').appendTo($("#c"));
                             $('<a />', {
                                 id: "a" + i,
                                 text: menulist[i].name,
                                 href: "javascript:{addTab(" +
                                 "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
-                            }).appendTo($("#backgroundmanage"));
-                            $('<br/><br/>').appendTo($("#backgroundmanage"));
+                            }).appendTo($("#c"));
+                            $('<br/><br/>').appendTo($("#c"));
                         }
+
+
 
                         if (menulist[i].url.indexOf("AccountManage") == 1) {
                             $('<img/>', {
@@ -103,17 +111,17 @@
                                 title: menulist[i].name,
                                 onclick: "javascript:{addTab(" +
                                 "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
-                            }).appendTo($("#accountmanage"));
-                            $('<br/><br/>').appendTo($("#accountmanage"));
+                            }).appendTo($("#d"));
+                            $('<br/><br/>').appendTo($("#d"));
                             $('<a />', {
                                 id: "a" + i,
                                 text: menulist[i].name,
                                 href: "javascript:{addTab(" +
                                 "'" + menulist[i].name + "'" + "," + "'" + "<%=contextPath%>" + menulist[i].url + "'" + ")}"
 
-                            }).appendTo($("#accountmanage"));
+                            }).appendTo($("#d"));
 
-                            $('<br/><br/>').appendTo($("#accountmanage"));
+                            $('<br/><br/>').appendTo($("#d"));
                         }
 
 
@@ -236,11 +244,11 @@
             font-size: 40px;
         }
 
-        #menus img {
+        #ordermanage img {
             width: 76px;
         }
 
-        #bulkcargomanage img {
+        #visitormanage img {
             width: 76px;
         }
 
@@ -266,16 +274,16 @@
     </div>
     <div data-options="region:'west',split:true" title="功能菜单" style="width:200px;">
         <div class="easyui-accordion" data-options="fit:true,border:false">
-            <div id="menus" class="title" title="预约登记" data-options="selected:true" style="padding:10px;">
+            <div id="a" class="title" title="预约管理" data-options="selected:true" style="padding:10px;">
 
             </div>
-            <div id="bulkcargomanage" class="title" title="访客管理" style="padding:10px;">
+            <div id="b" class="title" title="访客管理" style="padding:10px;">
 
             </div>
-            <div id="backgroundmanage" class="title" title="数据管理" style="padding:10px;">
+            <div id="c" class="title" title="受访管理" style="padding:10px;">
 
             </div>
-            <div id="accountmanage" class="title" title="账户管理" style="padding:10px;">
+            <div id="d" class="title" title="账户管理" style="padding:10px;">
 
             </div>
         </div>

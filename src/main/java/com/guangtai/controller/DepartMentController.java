@@ -1,10 +1,8 @@
 package com.guangtai.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.guangtai.model.domain.RoleMenu;
-import com.guangtai.model.domain.Menu;
-import com.guangtai.service.MenuService;
-import com.guangtai.service.RoleMenuService;
+import com.guangtai.model.domain.DepartMent;
+import com.guangtai.service.DepartMentService;
 import io.ruibu.model.ResultModel;
 import io.ruibu.util.SystemUtil;
 import org.apache.logging.log4j.LogManager;
@@ -17,10 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,90 +23,52 @@ import java.util.List;
  * UserController
  */
 @Controller
-@RequestMapping(value = "/Menu")
-public class MenuController {
+@RequestMapping(value = "/DepartMent")
+public class DepartMentController {
 
     @Autowired
-    private MenuService menuService;
-
-    @Autowired
-    private RoleMenuService roleMenuService;
+    private DepartMentService departMentService;
 
     @RequestMapping(value = "/")
     public ModelAndView Index() {
 
-        return new ModelAndView("Manage/Menu");
+        return new ModelAndView("Manage/DepartMent");
     }
 
     @RequestMapping(value = "/GetAll")
     @ResponseBody
     public String GetAll() {
         try {
-            List<Menu> MenuList = menuService.getMenu();
-            return SystemUtil.getObjectMapper().writeValueAsString(MenuList);
+            List<DepartMent> departMentList = departMentService.getDepartMent();
+            return SystemUtil.getObjectMapper().writeValueAsString(departMentList);
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
-    @RequestMapping("/Gettest")
-    @ResponseBody
-    public void getMenutest(HttpServletRequest request, HttpServletResponse response) {
-        Integer roleid = Integer.parseInt(request.getParameter("roleid"));
-
-        try {
-            List<Menu> menulist = new ArrayList<>();
-            List<RoleMenu> roleMenulist = roleMenuService.getRoleMenu(roleid);
-            Menu menu;
-            for (RoleMenu roleMenu : roleMenulist) {
-                menu = menuService.getById(Menu.class,roleMenu.getMenuid());
-                menulist.add(menu);
-                System.out.print(roleMenu);
-            }
-            System.out.print(menulist);
-            response.getWriter().write(SystemUtil.getObjectMapper().writeValueAsString(menulist));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     //添加
     @RequestMapping(value = "/Add")
     @ResponseBody
     public String Add(HttpServletRequest request,
-                      @RequestParam(required = false) String icon,
                       @RequestParam(required = false) String name,
-                      @RequestParam(required = false) String url,
-                      @RequestParam(required = false) String parentid,
                       @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
 
         try {
-            Menu menu = new Menu();
-
-            if (icon != null) {
-                menu.setIcon(icon);
-            }
+            DepartMent departMent = new DepartMent();
 
             if (name != null) {
-                menu.setName(name);
-            }
-
-            if (url != null) {
-                menu.setUrl(url);
-            }
-
-            if (parentid != null) {
-                menu.setParentid(Integer.valueOf(parentid));
+                departMent.setName(name);
             }
 
             if (remark != null) {
-                menu.setRemark(remark);
+                departMent.setRemark(remark);
             }
 
-            menu.setUpdatetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            departMent.setUpdatetime(LocalDateTime.now().toString());
             //执行修改添加方法
-            menuService.add(menu);
+            departMentService.add(departMent);
 
             resultModel.setSuccess(true);
             resultModel.setData("添加成功！");
@@ -136,39 +93,24 @@ public class MenuController {
     @RequestMapping(value = "/Edit/{id}")
     @ResponseBody
     public String Edit(HttpServletRequest request, @PathVariable String id,
-                       @RequestParam(required = false) String icon,
                        @RequestParam(required = false) String name,
-                       @RequestParam(required = false) String url,
-                       @RequestParam(required = false) String parentid,
                        @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
 
         try {
-            Menu menu = menuService.getById(Menu.class, Integer.valueOf(id));
-
-            if (icon != null) {
-                menu.setIcon(icon);
-            }
+            DepartMent departMent = departMentService.getById(DepartMent.class, Integer.valueOf(id));
 
             if (name != null) {
-                menu.setName(name);
-            }
-
-            if (url != null) {
-                menu.setUrl(url);
-            }
-
-            if (parentid != null) {
-                menu.setParentid(Integer.valueOf(parentid));
+                departMent.setName(name);
             }
 
             if (remark != null) {
-                menu.setRemark(remark);
+                departMent.setRemark(remark);
             }
 
-            menu.setUpdatetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            departMent.setUpdatetime(LocalDateTime.now().toString());
             //执行修改方法
-            menuService.edit(menu);
+            departMentService.edit(departMent);
 
             resultModel.setSuccess(true);
             resultModel.setData("修改成功！");
@@ -196,10 +138,10 @@ public class MenuController {
         ResultModel<String> resultModel = new ResultModel<>();
 
         try {
-            Menu menu = menuService.getById(Menu.class, Integer.valueOf(id));
+            DepartMent departMent = departMentService.getById(DepartMent.class, Integer.valueOf(id));
 
             //执行删除方法
-            menuService.delete(menu);
+            departMentService.delete(departMent);
 
             resultModel.setSuccess(true);
             resultModel.setData("删除成功！");

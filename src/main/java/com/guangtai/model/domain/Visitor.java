@@ -3,18 +3,15 @@ package com.guangtai.model.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "visitor", schema = "guangtai", catalog = "")
+@Table(name = "", schema = "guangtai", catalog = "")
 public class Visitor {
     private int id;
     private Integer certificateid;
     private Integer companyid;
     private String name;
-    private String retinue;
-    private String belongings;
     private String certificatenumber;
     private String transport;
     private String carnumber;
-    private String replacement;
     private String visitornumber;
     private String telephone;
     private String cometime;
@@ -62,26 +59,6 @@ public class Visitor {
     }
 
     @Basic
-    @Column(name = "retinue", nullable = true, length = 200)
-    public String getRetinue() {
-        return retinue;
-    }
-
-    public void setRetinue(String retinue) {
-        this.retinue = retinue;
-    }
-
-    @Basic
-    @Column(name = "belongings", nullable = true, length = 200)
-    public String getBelongings() {
-        return belongings;
-    }
-
-    public void setBelongings(String belongings) {
-        this.belongings = belongings;
-    }
-
-    @Basic
     @Column(name = "certificatenumber", nullable = true, length = 50)
     public String getCertificatenumber() {
         return certificatenumber;
@@ -109,16 +86,6 @@ public class Visitor {
 
     public void setCarnumber(String carnumber) {
         this.carnumber = carnumber;
-    }
-
-    @Basic
-    @Column(name = "replacement", nullable = true, length = 50)
-    public String getReplacement() {
-        return replacement;
-    }
-
-    public void setReplacement(String replacement) {
-        this.replacement = replacement;
     }
 
     @Basic
@@ -183,13 +150,10 @@ public class Visitor {
             return false;
         if (companyid != null ? !companyid.equals(visitor.companyid) : visitor.companyid != null) return false;
         if (name != null ? !name.equals(visitor.name) : visitor.name != null) return false;
-        if (retinue != null ? !retinue.equals(visitor.retinue) : visitor.retinue != null) return false;
-        if (belongings != null ? !belongings.equals(visitor.belongings) : visitor.belongings != null) return false;
         if (certificatenumber != null ? !certificatenumber.equals(visitor.certificatenumber) : visitor.certificatenumber != null)
             return false;
         if (transport != null ? !transport.equals(visitor.transport) : visitor.transport != null) return false;
         if (carnumber != null ? !carnumber.equals(visitor.carnumber) : visitor.carnumber != null) return false;
-        if (replacement != null ? !replacement.equals(visitor.replacement) : visitor.replacement != null) return false;
         if (visitornumber != null ? !visitornumber.equals(visitor.visitornumber) : visitor.visitornumber != null)
             return false;
         if (telephone != null ? !telephone.equals(visitor.telephone) : visitor.telephone != null) return false;
@@ -206,12 +170,9 @@ public class Visitor {
         result = 31 * result + (certificateid != null ? certificateid.hashCode() : 0);
         result = 31 * result + (companyid != null ? companyid.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (retinue != null ? retinue.hashCode() : 0);
-        result = 31 * result + (belongings != null ? belongings.hashCode() : 0);
         result = 31 * result + (certificatenumber != null ? certificatenumber.hashCode() : 0);
         result = 31 * result + (transport != null ? transport.hashCode() : 0);
         result = 31 * result + (carnumber != null ? carnumber.hashCode() : 0);
-        result = 31 * result + (replacement != null ? replacement.hashCode() : 0);
         result = 31 * result + (visitornumber != null ? visitornumber.hashCode() : 0);
         result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
         result = 31 * result + (cometime != null ? cometime.hashCode() : 0);
