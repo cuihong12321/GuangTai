@@ -38,7 +38,7 @@
             processData: false,
             success: function (data) {
                 menulist =eval(data);
-                $('#menus').accordion('add',{
+                $('#a').accordion('add',{
                     class:'div',
                     id:'div1'
 
@@ -177,7 +177,7 @@
 </style>
 <div id="layout" class="easyui-layout" style="width:100%;height:100%;">
     <div data-options="region:'west',split:true" title="功能菜单" style="width:200px;">
-        <div id="menus" class="easyui-accordion" data-options="fit:true,border:false">
+        <div id="a" class="easyui-accordion" data-options="fit:true,border:false">
 
             <c:forEach var="menu" items="${menulist}">
 

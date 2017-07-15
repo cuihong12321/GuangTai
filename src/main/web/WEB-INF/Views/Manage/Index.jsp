@@ -244,19 +244,19 @@
             font-size: 40px;
         }
 
-        #ordermanage img {
+        #a img {
             width: 76px;
         }
 
-        #visitormanage img {
+        #b img {
             width: 76px;
         }
 
-        #backgroundmanage img {
+        #c img {
             width: 76px;
         }
 
-        #accountmanage img {
+        #d img {
             width: 76px;
         }
 

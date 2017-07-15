@@ -18,9 +18,9 @@ public class HomeController {
 
 
 
-    @RequestMapping(value = "/BackGround/Forground")
-    public ModelAndView Forground() {
-        return new ModelAndView("Forground");
+    @RequestMapping(value = "/ForGround/ForGround")
+    public ModelAndView ForGround() {
+        return new ModelAndView("ForGround");
     }
 
     @RequestMapping(value = "/ForGround/InsertOrder")
