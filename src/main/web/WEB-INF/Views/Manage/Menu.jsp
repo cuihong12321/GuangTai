@@ -16,10 +16,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <script src="<%=contextPath%>/resources/bower_components/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.spa.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.common.css"/>
-    <link rel="dx-theme" data-theme="generic.light" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.light.css"/>
-    <script src="https://cdn3.devexpress.com/jslib/17.1.3/js/dx.all.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/bower_components/devextreme/css/dx.spa.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/bower_components/devextreme/css/dx.common.css"/>
+    <link rel="dx-theme" data-theme="generic.light" href="<%=contextPath%>/resources/bower_components/devextreme/css/dx.light.css"/>
+    <script src="<%=contextPath%>/resources/bower_components/devextreme/js/dx.all.js"></script>
     <style>
         #gridContainer {
             height: auto;
@@ -75,6 +75,9 @@
                     allowUpdating: true,
                     allowDeleting: true,
                     allowAdding: true,
+                    texts: {
+                        confirmDeleteMessage: "确认删除吗？"
+                    },
                     popup: {
                         title: "菜单",
                         showTitle: true,
@@ -92,11 +95,13 @@
                 rowAlternationEnabled: true,
                 showBorders: true,
                 columnAutoWidth: true,
+                allowColumnReordering: true,
+                allowColumnResizing: true,
+                columnFixing: {
+                    enabled: true
+                },
                 selection: {
                     mode: "multiple"
-                },
-                columnChooser: {
-                    enabled: true
                 },
                 loadPanel: {
                     enabled: true
@@ -104,7 +109,8 @@
                 columns: [
                     {
                         dataField: "image",
-                        width: 300
+                        width: 300,
+                        fixed: true
                     },
                     {
                         dataField: "name",

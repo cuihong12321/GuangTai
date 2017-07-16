@@ -16,10 +16,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <script src="<%=contextPath%>/resources/bower_components/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.spa.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.common.css"/>
-    <link rel="dx-theme" data-theme="generic.light" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.light.css"/>
-    <script src="https://cdn3.devexpress.com/jslib/17.1.3/js/dx.all.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/bower_components/devextreme/css/dx.spa.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/bower_components/devextreme/css/dx.common.css"/>
+    <link rel="dx-theme" data-theme="generic.light" href="<%=contextPath%>/resources/bower_components/devextreme/css/dx.light.css"/>
+    <script src="<%=contextPath%>/resources/bower_components/devextreme/js/dx.all.js"></script>
     <style>
         #gridContainer {
             height: auto;

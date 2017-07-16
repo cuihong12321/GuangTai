@@ -64,7 +64,6 @@ public class CheckOrderController {
                       @RequestParam(required = false) String cometime,
                       @RequestParam(required = false) String leavetime,
                       @RequestParam(required = false) String operatorid,
-                      @RequestParam(required = false) String operatetime,
                       @RequestParam(required = false) String state,
                       @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
@@ -105,28 +104,25 @@ public class CheckOrderController {
             }
 
             if (ordertime != null) {
-                reservation.setOrdertime(LocalDateTime.now().toString());
+                reservation.setOrdertime(ordertime);
             }
 
             if (interviewtime != null) {
-                reservation.setInterviewtime(LocalDateTime.now().toString());
+                reservation.setInterviewtime(interviewtime);
             }
 
             if (cometime != null) {
-                reservation.setCometime(LocalDateTime.now().toString());
+                reservation.setCometime(cometime);
             }
 
             if (leavetime != null) {
-                reservation.setLeavetime(LocalDateTime.now().toString());
+                reservation.setLeavetime(leavetime);
             }
 
             if (operatorid != null) {
                 reservation.setOperatorid(Integer.valueOf(operatorid));
             }
-
-            if (operatetime != null) {
                 reservation.setOperatetime(LocalDateTime.now().toString());
-            }
 
             if (state != null) {
                 reservation.setState(Integer.valueOf(state));
@@ -174,7 +170,6 @@ public class CheckOrderController {
                        @RequestParam(required = false) String cometime,
                        @RequestParam(required = false) String leavetime,
                        @RequestParam(required = false) String operatorid,
-                       @RequestParam(required = false) String operatetime,
                        @RequestParam(required = false) String state,
                        @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
@@ -215,28 +210,25 @@ public class CheckOrderController {
             }
 
             if (ordertime != null) {
-                reservation.setOrdertime(LocalDateTime.now().toString());
+                reservation.setOrdertime(ordertime);
             }
 
             if (interviewtime != null) {
-                reservation.setInterviewtime(LocalDateTime.now().toString());
+                reservation.setInterviewtime(interviewtime);
             }
 
             if (cometime != null) {
-                reservation.setCometime(LocalDateTime.now().toString());
+                reservation.setCometime(cometime);
             }
 
             if (leavetime != null) {
-                reservation.setLeavetime(LocalDateTime.now().toString());
+                reservation.setLeavetime(leavetime);
             }
 
             if (operatorid != null) {
                 reservation.setOperatorid(Integer.valueOf(operatorid));
             }
-
-            if (operatetime != null) {
                 reservation.setOperatetime(LocalDateTime.now().toString());
-            }
 
             if (state != null) {
                 reservation.setState(Integer.valueOf(state));

@@ -21,6 +21,24 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     @Transactional
+    public List<Reservation> getNewReservation() {
+        String hql = "FROM Reservation r where r.state < 1";
+        Query query = baseDAO.getSessionFactory().getCurrentSession().createQuery(hql);
+        List<Reservation> list = query.list();
+        return list;
+    }
+
+    @Override
+    @Transactional
+    public List<Reservation> getEditReservation() {
+        String hql = "FROM Reservation r where r.state >= 1";
+        Query query = baseDAO.getSessionFactory().getCurrentSession().createQuery(hql);
+        List<Reservation> list = query.list();
+        return list;
+    }
+
+    @Override
+    @Transactional
     public List<Reservation> getReservation() {
         String hql = "FROM Reservation";
         Query query = baseDAO.getSessionFactory().getCurrentSession().createQuery(hql);

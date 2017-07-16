@@ -2,7 +2,9 @@ package com.guangtai.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.guangtai.model.domain.Reservation;
+import com.guangtai.model.domain.User;
 import com.guangtai.service.ReservationService;
+import com.guangtai.service.UserService;
 import io.ruibu.model.ResultModel;
 import io.ruibu.util.SystemUtil;
 import org.apache.logging.log4j.LogManager;
@@ -29,6 +31,9 @@ public class InsertOrderController {
     @Autowired
     private ReservationService reservationService;
 
+    @Autowired
+    UserService userService;
+
     @RequestMapping(value = "/")
     public ModelAndView Index() {
 
@@ -39,7 +44,7 @@ public class InsertOrderController {
     @ResponseBody
     public String GetAll() {
         try {
-            List<Reservation> reservationList = reservationService.getReservation();
+            List<Reservation> reservationList = reservationService.getNewReservation();
             return SystemUtil.getObjectMapper().writeValueAsString(reservationList);
         } catch (Exception e) {
             return e.getMessage();
@@ -64,7 +69,6 @@ public class InsertOrderController {
                       @RequestParam(required = false) String cometime,
                       @RequestParam(required = false) String leavetime,
                       @RequestParam(required = false) String operatorid,
-                      @RequestParam(required = false) String operatetime,
                       @RequestParam(required = false) String state,
                       @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
@@ -105,32 +109,35 @@ public class InsertOrderController {
             }
 
             if (ordertime != null) {
-                reservation.setOrdertime(LocalDateTime.now().toString());
+                reservation.setOrdertime(ordertime);
             }
 
             if (interviewtime != null) {
-                reservation.setInterviewtime(LocalDateTime.now().toString());
+                reservation.setInterviewtime(interviewtime);
             }
 
             if (cometime != null) {
-                reservation.setCometime(LocalDateTime.now().toString());
+                reservation.setCometime(cometime);
             }
 
             if (leavetime != null) {
-                reservation.setLeavetime(LocalDateTime.now().toString());
+                reservation.setLeavetime(leavetime);
             }
 
             if (operatorid != null) {
                 reservation.setOperatorid(Integer.valueOf(operatorid));
             }
 
-            if (operatetime != null) {
                 reservation.setOperatetime(LocalDateTime.now().toString());
-            }
 
             if (state != null) {
                 reservation.setState(Integer.valueOf(state));
             }
+            String username = request.getParameter("username");
+            System.out.print("------------"+username);
+            User user = userService.getByName(username);
+
+            reservation.setOperatorid(user.getId());
 
             if (remark != null) {
                 reservation.setRemark(remark);
@@ -174,7 +181,6 @@ public class InsertOrderController {
                        @RequestParam(required = false) String cometime,
                        @RequestParam(required = false) String leavetime,
                        @RequestParam(required = false) String operatorid,
-                       @RequestParam(required = false) String operatetime,
                        @RequestParam(required = false) String state,
                        @RequestParam(required = false) String remark) {
         ResultModel<String> resultModel = new ResultModel<>();
@@ -215,28 +221,26 @@ public class InsertOrderController {
             }
 
             if (ordertime != null) {
-                reservation.setOrdertime(LocalDateTime.now().toString());
+                reservation.setOrdertime(ordertime);
             }
 
             if (interviewtime != null) {
-                reservation.setInterviewtime(LocalDateTime.now().toString());
+                reservation.setInterviewtime(interviewtime);
             }
 
             if (cometime != null) {
-                reservation.setCometime(LocalDateTime.now().toString());
+                reservation.setCometime(cometime);
             }
 
             if (leavetime != null) {
-                reservation.setLeavetime(LocalDateTime.now().toString());
+                reservation.setLeavetime(leavetime);
             }
 
             if (operatorid != null) {
                 reservation.setOperatorid(Integer.valueOf(operatorid));
             }
 
-            if (operatetime != null) {
                 reservation.setOperatetime(LocalDateTime.now().toString());
-            }
 
             if (state != null) {
                 reservation.setState(Integer.valueOf(state));

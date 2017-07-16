@@ -17,31 +17,40 @@ import java.util.List;
 @Service("UserService")
 public class UserServiceImpl implements UserService {
     @Resource
-    private BaseDAO<User> baseDAO;
+    private BaseDAO baseDAO;
 
     @Override
+    @Transactional
     public List<User> getUser() {
-        return null;
+        String hql = "FROM User";
+        Query query = baseDAO.getSessionFactory().getCurrentSession().createQuery(hql);
+        List<User> list = query.list();
+        return list;
     }
 
     @Override
+    @Transactional
     public User getById(Class<User> user, int id) {
-        return null;
+        User u = (User) baseDAO.get(user, id);
+        return u;
     }
 
     @Override
+    @Transactional
     public void add(User user) {
-
+        baseDAO.save(user);
     }
 
     @Override
+    @Transactional
     public void edit(User user) {
-
+        baseDAO.update(user);
     }
 
     @Override
+    @Transactional
     public void delete(User user) {
-
+        baseDAO.delete(user);
     }
 
     @Override

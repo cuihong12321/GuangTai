@@ -1,12 +1,9 @@
 package com.guangtai.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.guangtai.model.domain.Interviewee;
-import com.guangtai.model.domain.Role;
 import com.guangtai.model.domain.User;
 import com.guangtai.service.*;
 import io.ruibu.model.ResultModel;
-import io.ruibu.model.wechat.UnionUserModel;
 import io.ruibu.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,8 +26,8 @@ import java.util.List;
 @RequestMapping(value = "/User")
 public class UserController {
 
-//    @Resource
-//    private UserService userService;
+      @Autowired
+      private UserService userService;
 //
 //    @Resource
 //    private RoleService roleService;
@@ -775,9 +768,6 @@ public class UserController {
 //        return "";
 //    }
 
-    @Autowired
-    UserService userService;
-
 
     @RequestMapping(value = "/")
     public ModelAndView Index() {
@@ -819,7 +809,7 @@ public class UserController {
             }
 
             if (password != null) {
-                user.setUsername(SecurityUtil.encrypt(password, SecurityUtil.AlgorithmType.SHA512));
+                user.setPassword(SecurityUtil.encrypt(password, SecurityUtil.AlgorithmType.SHA512));
             }
 
             if (telephone != null) {
@@ -876,7 +866,7 @@ public class UserController {
             }
 
             if (password != null) {
-                user.setUsername(SecurityUtil.encrypt(password, SecurityUtil.AlgorithmType.SHA512));
+                user.setPassword(SecurityUtil.encrypt(password, SecurityUtil.AlgorithmType.SHA512));
             }
 
             if (telephone != null) {

@@ -10,6 +10,10 @@ import java.util.List;
  */
 public interface ReservationService {
 
+    List<Reservation> getNewReservation();
+
+    List<Reservation> getEditReservation();
+
     List<Reservation> getReservation();
 
     Reservation getById(Class<Reservation> reservation, int id);

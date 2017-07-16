@@ -16,10 +16,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <script src="<%=contextPath%>/resources/bower_components/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.spa.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.common.css"/>
-    <link rel="dx-theme" data-theme="generic.light" href="https://cdn3.devexpress.com/jslib/17.1.3/css/dx.light.css"/>
-    <script src="https://cdn3.devexpress.com/jslib/17.1.3/js/dx.all.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="<%=contextPath%>/resources/bower_components/devextreme/css/dx.spa.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="<%=contextPath%>/resources/bower_components/devextreme/css/dx.common.css"/>
+    <link rel="dx-theme" data-theme="generic.light"
+          href="<%=contextPath%>/resources/bower_components/devextreme/css/dx.light.css"/>
+    <script src="<%=contextPath%>/resources/bower_components/devextreme/js/dx.all.js"></script>
     <style>
         #gridContainer {
             height: auto;
@@ -38,7 +41,7 @@
             });
 
             var Visitor = new DevExpress.data.ODataStore({
-                url: "<%=contextPath%>//GetAll"
+                url: "<%=contextPath%>/Visitor/GetAll"
             });
 
             var Certificate = new DevExpress.data.ODataStore({
@@ -110,25 +113,28 @@
                     rowAlternationEnabled: true,
                     showBorders: true,
                     columnAutoWidth: true,
-                    selection: {
-                        mode: "multiple"
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    columnFixing: {
+                        enabled: true
                     },
                     columns: [
-                        {
-                            dataField: "companyid",
-                            caption: "来宾公司",
-                            lookup: {
-                                valueExpr: "id",
-                                displayExpr: "name",
-                                dataSource: {
-                                    store: Company
-                                }
-                            },
-                            width: 300
-                        },
+//                        {
+//                            dataField: "companyid",
+//                            caption: "来宾公司",
+//                            lookup: {
+//                                valueExpr: "id",
+//                                displayExpr: "name",
+//                                dataSource: {
+//                                    store: Company
+//                                }
+//                            },
+//                            width: 100
+//                        },
                         {
                             dataField: "visitorid",
                             caption: "来宾姓名",
+                            fixed: true,
                             lookup: {
                                 valueExpr: "id",
                                 displayExpr: "name",
@@ -136,34 +142,34 @@
                                     store: Visitor
                                 }
                             },
-                            width: 300
+                            width: 100
                         },
+//                        {
+//                            dataField: "certificateid",
+//                            caption: "证件名称",
+//                            lookup: {
+//                                valueExpr: "id",
+//                                displayExpr: "name",
+//                                dataSource: {
+//                                    store: Certificate
+//                                }
+//                            },
+//                            width: 100
+//                        },
+//                        {
+//                            dataField: "departmentid",
+//                            caption: "被访部门",
+//                            lookup: {
+//                                valueExpr: "id",
+//                                displayExpr: "name",
+//                                dataSource: {
+//                                    store: DepartMent
+//                                }
+//                            },
+//                            width: 100
+//                        },
                         {
-                            dataField: "certificateid",
-                            caption: "证件名称",
-                            lookup: {
-                                valueExpr: "id",
-                                displayExpr: "name",
-                                dataSource: {
-                                    store: Certificate
-                                }
-                            },
-                            width: 300
-                        },
-                        {
-                            dataField: "departmentid",
-                            caption: "被访部门",
-                            lookup: {
-                                valueExpr: "id",
-                                displayExpr: "name",
-                                dataSource: {
-                                    store: DepartMent
-                                }
-                            },
-                            width: 300
-                        },
-                        {
-                            dataField: "intervieweweeid",
+                            dataField: "intervieweeid",
                             caption: "被访人",
                             lookup: {
                                 valueExpr: "id",
@@ -172,83 +178,122 @@
                                     store: Interviewee
                                 }
                             },
-                            width: 300
+                            width: 100
                         },
                         {
                             dataField: "reason",
                             caption: "来访事由",
-                            width: 300
+                            editorOptions: {
+                                minHeight: 200
+                            }
                         },
                         {
                             dataField: "retinue",
                             caption: "随行人员",
-                            width: 300
+                            width: 100
                         },
                         {
                             dataField: "belongings",
                             caption: "携带物品",
-                            width: 300
+                            width: 100
                         },
-                        {
-                            dataField: "certificatenumber",
-                            caption: "证件号码",
-                            width: 300
-                        },
+//                        {
+//                            dataField: "certificatenumber",
+//                            caption: "证件号码",
+//                            width: 100
+//                        },
                         {
                             dataField: "transport",
                             caption: "交通工具",
-                            width: 300
+                            width: 100
                         },
-                        {
-                            dataField: "carnumber",
-                            caption: "车牌号码",
-                            width: 300
-                        },
+//                        {
+//                            dataField: "carnumber",
+//                            caption: "车牌号码",
+//                            width: 100
+//                        },
                         {
                             dataField: "replacement",
                             caption: "换证物品",
-                            width: 300
+                            width: 100
                         },
                         {
                             dataField: "visitornumber",
                             caption: "访客证号",
-                            width: 300
+                            width: 100
                         },
                         {
                             dataField: "ordertime",
                             caption: "预约时间",
                             dataType: "date",
-                            width: 300
+                            format: "shortDateShortTime",
+                            editorOptions: { type: "datetime" },
+                            width: 150
                         },
                         {
                             dataField: "interviewtime",
                             caption: "来访时间",
                             dataType: "date",
-                            width: 300
+                            format: "shortDateShortTime",
+                            editorOptions: { type: "datetime" },
+                            width: 150
                         },
                         {
                             dataField: "cometime",
                             caption: "进厂时间",
                             dataType: "date",
-                            width: 300
+                            format: "shortDateShortTime",
+                            editorOptions: { type: "datetime" },
+                            width: 150
                         },
                         {
                             dataField: "leavetime",
                             caption: "出厂时间",
                             dataType: "date",
-                            width: 300
+                            format: "shortDateShortTime",
+                            editorOptions: { type: "datetime" },
+                            width: 150
                         },
                         {
                             dataField: "state",
                             caption: "状态",
-                            width: 300
+                            dataType: "boolean",
+                            showEditorAlways: false
+
+                        },
+                        {
+                            dataField: "operatorid",
+                            caption: "操作人",
+                            allowEditing: false,
+                            width: 100
+                        },
+                        {
+                            dataField: "operatetime",
+                            caption: "操作时间",
+                            allowEditing: false,
+                            dataType: "date",
+                            format: "shortDateShortTime",
+                            editorOptions: { type: "datetime" },
+                            width: 150
                         },
                         {
                             dataField: "remark",
                             caption: "备注",
-                            width: 300
+                            width: 100
                         }
                     ],
+                    onEditorPreparing: function(e) {
+                        if (e.dataField == "reason") {
+                            // Changes the editor's type
+                            e.editorName = "dxTextArea";
+                            e.editorOptions.onValueChanged = function (e) {
+                                // Implement your logic here
+
+                                // Updates the cell value
+                                e.setValue(value);
+                            }
+                        }
+                    },
                     onCellPrepared: function (e) {
                         if (e.column.command === "edit") {
                             e.cellElement.children(".dx-link-add").remove();
